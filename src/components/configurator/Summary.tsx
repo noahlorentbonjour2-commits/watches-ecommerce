@@ -1,0 +1,82 @@
+import {
+  categories,
+  layerOrder,
+  optionFor,
+  type Configuration,
+} from "@/lib/parts";
+
+type SummaryProps = {
+  config: Configuration;
+  basePrice: number;
+  total: number;
+  validated: boolean;
+};
+
+const euro = (value: number) =>
+  new Intl.NumberFormat("fr-FR", {
+    style: "currency",
+    currency: "EUR",
+    maximumFractionDigits: 0,
+  }).format(value);
+
+export default function Summary({
+  config,
+  basePrice,
+  total,
+  validated,
+}: SummaryProps) {
+  return (
+    <section
+      aria-labelledby="recapitulatif-titre"
+      className={`mt-10 border p-7 transition-colors duration-500 sm:p-8 ${
+        validated
+          ? "border-gold-500/60 bg-gold-500/6"
+          : "border-white/10 bg-navy-950/50"
+      }`}
+    >
+      <h2
+        id="recapitulatif-titre"
+        className="text-[0.68rem] uppercase tracking-luxe text-gold-500"
+      >
+        Récapitulatif
+      </h2>
+
+      <dl className="mt-6 divide-y divide-white/8">
+        <div className="flex items-baseline justify-between gap-4 pb-3.5">
+          <dt className="text-sm text-silver-300">
+            Base — mouvement automatique, verre saphir
+          </dt>
+          <dd className="shrink-0 text-sm text-cream">{euro(basePrice)}</dd>
+        </div>
+
+        {layerOrder.map((categoryId) => {
+          const category = categories.find((c) => c.id === categoryId)!;
+          const option = optionFor(categoryId, config[categoryId]);
+          return (
+            <div
+              key={categoryId}
+              className="flex items-baseline justify-between gap-4 py-3.5"
+            >
+              <dt className="text-sm text-silver-300">
+                <span className="text-silver-500">{category.label} — </span>
+                {option.label}
+              </dt>
+              <dd className="shrink-0 text-sm text-cream">
+                {option.extra === 0 ? "Inclus" : `+ ${euro(option.extra)}`}
+              </dd>
+            </div>
+          );
+        })}
+
+        <div className="flex items-baseline justify-between gap-4 pt-5">
+          <dt className="font-serif text-xl text-cream">Total</dt>
+          <dd className="font-serif text-3xl text-gold-400">{euro(total)}</dd>
+        </div>
+      </dl>
+
+      <p className="mt-5 text-xs text-silver-500">
+        Livraison offerte en France — délai d&apos;assemblage 10 jours ouvrés.
+      </p>
+    </section>
+  );
+}

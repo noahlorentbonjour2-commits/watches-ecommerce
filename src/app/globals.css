@@ -1,26 +1,103 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@theme {
+  /* ── Palette : bleu nuit + or ─────────────────────────────── */
+  --color-ink: #05080F;
+  --color-navy-950: #070C1A;
+  --color-navy-900: #0B1327;
+  --color-navy-800: #121D3A;
+  --color-navy-700: #1B294F;
+  --color-navy-600: #27396A;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --color-gold-400: #E2CB96;
+  --color-gold-500: #C9A96A;
+  --color-gold-600: #A6874C;
+  --color-silver-300: #D6DCE6;
+  --color-silver-500: #9AA6BE;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  --color-cream: #F6F4EF;
+
+  /* ── Typographie ──────────────────────────────────────────── */
+  --font-serif: var(--font-cormorant), ui-serif, Georgia, serif;
+  --font-sans: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
+
+  /* ── Espacements généreux (dial density 3/10) ─────────────── */
+  --spacing-section: 7rem;
+
+  /* ── Animations ───────────────────────────────────────────── */
+  --animate-shimmer: shimmer 2.6s linear infinite;
+
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5.5rem;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    background-color: var(--color-ink);
+    color: var(--color-cream);
+    font-family: var(--font-sans);
+    font-weight: 300;
+    letter-spacing: 0.01em;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-serif);
+    font-weight: 300;
+  }
+
+  ::selection {
+    background-color: var(--color-gold-500);
+    color: var(--color-ink);
+  }
+
+  /* Focus visible cohérent sur tout le site (a11y) */
+  :focus-visible {
+    outline: 2px solid var(--color-gold-500);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+}
+
+@layer utilities {
+  /* Filet doré décoratif */
+  .rule-gold {
+    background-image: linear-gradient(
+      to right,
+      transparent,
+      var(--color-gold-600) 20%,
+      var(--color-gold-400) 50%,
+      var(--color-gold-600) 80%,
+      transparent
+    );
+  }
+
+  .text-gold-gradient {
+    background-image: linear-gradient(100deg, #A6874C, #E2CB96 45%, #C9A96A 70%, #E2CB96);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .tracking-luxe {
+    letter-spacing: 0.28em;
+  }
+}
+
+/* Réduction de mouvement : on coupe tout ce qui n'est pas essentiel */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
 }

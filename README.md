@@ -1,36 +1,82 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# My Dial — site vitrine
 
-## Getting Started
+Site vitrine et configurateur de la manufacture horlogère **My Dial**.
+Next.js 16 (App Router) · TypeScript · Tailwind CSS v4.
 
-First, run the development server:
+## Démarrer
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Le site est servi sur http://localhost:3000.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Script | Rôle |
+| --- | --- |
+| `npm run dev` | Serveur de développement (Turbopack) |
+| `npm run build` | Build de production |
+| `npm run start` | Serveur de production |
+| `npm run lint` | ESLint |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Structure
 
-## Learn More
+```
+src/
+├─ app/
+│  ├─ layout.tsx              en-tête, pied de page, polices, métadonnées
+│  ├─ page.tsx                page d'accueil (hero, collection, savoir-faire…)
+│  ├─ montre-personnalisee/   configurateur
+│  ├─ globals.css             jetons de design (couleurs, typo, utilitaires)
+│  ├─ sitemap.ts / robots.ts  SEO
+│  └─ icon.png                favicon dérivé du logo
+├─ components/
+│  ├─ layout/                 Header, Footer
+│  ├─ ui/                     Reveal, SectionHeading, GoldButton
+│  ├─ home/                   sections de la page d'accueil
+│  └─ configurator/           Configurator, WatchPreview, OptionThumb, Summary
+└─ lib/
+   ├─ watches.ts              catalogue des 12 modèles
+   └─ parts.ts                composants du configurateur + tarifs
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Design
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Couleurs** : bleu nuit (`--color-ink`, `--color-navy-*`) et or (`--color-gold-*`),
+  déclarés dans `@theme` de `globals.css` — aucun hexadécimal en dur dans les composants.
+- **Typographie** : Cormorant Garamond (titres) + Montserrat (texte), chargées via `next/font`.
+- **Animations** : apparition au défilement (`Reveal`, IntersectionObserver) et parallaxe
+  légère du hero. Tout est neutralisé sous `prefers-reduced-motion: reduce`.
+- **Accessibilité** : lien d'évitement, cibles tactiles ≥ 44 px, focus visible doré,
+  onglets du configurateur navigables au clavier (flèches, Début, Fin), aperçu décrit
+  par un `aria-label` mis à jour à chaque choix.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Configurateur
 
-## Deploy on Vercel
+Les visuels sont cinq calques PNG 1000 × 1000 parfaitement alignés, empilés dans
+l'ordre physique défini par `layerOrder` (`src/lib/parts.ts`) :
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+bracelet → boîtier → cadran → lunette → aiguilles
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Ajouter une variante = déposer le PNG dans `public/parts/<catégorie>/` puis ajouter
+une entrée dans la catégorie correspondante de `categories`. Aucun autre fichier à toucher.
+
+Les variantes de la catégorie ouverte sont préchargées en opacité 0 : changer de pièce
+est instantané, sans clignotement.
+
+La validation est un simple récapitulatif — aucun paiement n'est branché.
+
+## Images
+
+Tous les visuels proviennent des photos de production (`public/brand`, `public/collection`,
+`public/parts`, `public/avis`) et sont servis via `next/image` (AVIF/WebP, tailles
+responsives). Aucun visuel n'est généré.
+
+## Déploiement (Vercel)
+
+1. Pousser le dépôt sur GitHub, puis « Import Project » sur Vercel.
+2. Framework détecté automatiquement : Next.js. Aucune configuration de build à ajouter.
+3. Renseigner la variable d'environnement `NEXT_PUBLIC_SITE_URL` avec le domaine final
+   (utilisée par les métadonnées Open Graph, le sitemap et `robots.txt`).
