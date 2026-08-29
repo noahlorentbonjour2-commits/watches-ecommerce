@@ -1,5 +1,5 @@
 import {
-  categories,
+  categoryById,
   layerOrder,
   optionFor,
   type Configuration,
@@ -50,7 +50,7 @@ export default function Summary({
         </div>
 
         {layerOrder.map((categoryId) => {
-          const category = categories.find((c) => c.id === categoryId)!;
+          const category = categoryById(categoryId);
           const option = optionFor(categoryId, config[categoryId]);
           return (
             <div
@@ -59,7 +59,7 @@ export default function Summary({
             >
               <dt className="text-sm text-silver-300">
                 <span className="text-silver-500">{category.label} — </span>
-                {option.label}
+                {option.image ? option.label : "lunette d'origine"}
               </dt>
               <dd className="shrink-0 text-sm text-cream">
                 {option.extra === 0 ? "Inclus" : `+ ${euro(option.extra)}`}

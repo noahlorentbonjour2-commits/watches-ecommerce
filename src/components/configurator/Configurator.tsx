@@ -8,7 +8,9 @@ import Summary from "./Summary";
 import {
   BASE_PRICE,
   categories,
+  categoryById,
   defaultConfiguration,
+  groupedOptions,
   layerOrder,
   optionFor,
   totalPrice,
@@ -82,9 +84,9 @@ export default function Configurator() {
         </div>
 
         {/* Rappel des choix : masqué sur mobile pour garder la barre collante courte. */}
-        <ul className="mt-4 hidden gap-2 lg:grid lg:grid-cols-5">
+        <ul className="mt-4 hidden gap-2 lg:grid lg:grid-cols-3">
           {layerOrder.map((categoryId) => {
-            const category = categories.find((c) => c.id === categoryId)!;
+            const category = categoryById(categoryId);
             return (
               <li
                 key={categoryId}
@@ -124,7 +126,7 @@ export default function Configurator() {
                 tabIndex={active ? 0 : -1}
                 onClick={() => setActiveTab(category.id)}
                 onKeyDown={(event) => onTabKeyDown(event, index)}
-                className={`min-h-11 cursor-pointer border px-5 py-2.5 text-[0.65rem] uppercase tracking-[0.16em] transition-all duration-300 ${
+                className={`min-h-11 cursor-pointer border px-4 py-2.5 text-[0.62rem] uppercase tracking-[0.14em] transition-all duration-300 ${
                   active
                     ? "border-gold-500 bg-gold-500/12 text-gold-400"
                     : "border-white/12 text-silver-500 hover:border-white/30 hover:text-cream"
@@ -149,17 +151,24 @@ export default function Configurator() {
             <h2 className="text-3xl text-cream">{category.label}</h2>
             <p className="mt-2 text-sm text-silver-500">{category.hint}</p>
 
-            <div className="mt-6 grid grid-cols-3 gap-3 sm:grid-cols-4 lg:grid-cols-5">
-              {category.options.map((option) => (
-                <OptionThumb
-                  key={option.id}
-                  option={option}
-                  zoom={category.thumbZoom}
-                  selected={config[category.id] === option.id}
-                  onSelect={() => select(category.id, option.id)}
-                />
-              ))}
-            </div>
+            {groupedOptions(category).map(([group, options]) => (
+              <section key={group} className="mt-7 first:mt-6">
+                <h3 className="text-[0.6rem] uppercase tracking-[0.18em] text-gold-500">
+                  {group}
+                </h3>
+                <div className="mt-3 grid grid-cols-3 gap-3 sm:grid-cols-4 lg:grid-cols-5">
+                  {options.map((option) => (
+                    <OptionThumb
+                      key={option.id}
+                      option={option}
+                      zoom={category.thumbZoom}
+                      selected={config[category.id] === option.id}
+                      onSelect={() => select(category.id, option.id)}
+                    />
+                  ))}
+                </div>
+              </section>
+            ))}
           </div>
         ))}
 

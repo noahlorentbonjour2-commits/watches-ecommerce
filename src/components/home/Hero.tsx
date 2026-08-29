@@ -54,8 +54,9 @@ export default function Hero() {
 
           <p className="mt-7 max-w-lg text-base leading-relaxed text-silver-300 sm:text-lg">
             Des montres automatiques assemblées à la main, pièce par pièce.
-            Choisissez le boîtier, la lunette, le cadran, les aiguilles et le
-            bracelet : votre montre n&apos;existera qu&apos;en un seul exemplaire.
+            Choisissez le boîtier, la lunette, le cadran, les aiguilles, la
+            trotteuse et le bracelet : votre montre n&apos;existera qu&apos;en un
+            seul exemplaire.
           </p>
 
           <div className="mt-10 flex flex-col gap-4 sm:flex-row">

@@ -26,15 +26,30 @@ export default function OptionThumb({
       }`}
     >
       <span className="relative block aspect-square w-full overflow-hidden bg-[radial-gradient(circle,var(--color-navy-800)_0%,var(--color-navy-950)_75%)]">
-        <Image
-          src={option.image}
-          alt=""
-          aria-hidden="true"
-          fill
-          sizes="120px"
-          style={{ transform: `scale(${zoom})` }}
-          className="object-contain transition-transform duration-300 group-hover:brightness-110"
-        />
+        {option.image ? (
+          <Image
+            src={option.image}
+            alt=""
+            aria-hidden="true"
+            fill
+            sizes="120px"
+            style={{ transform: `scale(${zoom})` }}
+            className="object-contain transition-transform duration-300 group-hover:brightness-110"
+          />
+        ) : (
+          // Option « sans » : croix discrète plutôt qu'une vignette vide.
+          <span className="absolute inset-0 flex items-center justify-center">
+            <svg
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              className="size-6 stroke-silver-500 stroke-[1.2]"
+              fill="none"
+            >
+              <circle cx="12" cy="12" r="9" />
+              <path d="m6 18 12-12" />
+            </svg>
+          </span>
+        )}
       </span>
       <span
         className={`text-[0.62rem] leading-tight ${

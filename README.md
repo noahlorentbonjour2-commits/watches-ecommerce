@@ -53,15 +53,23 @@ src/
 
 ## Configurateur
 
-Les visuels sont cinq calques PNG 1000 × 1000 parfaitement alignés, empilés dans
+Les visuels sont six calques PNG 1000 × 1000 parfaitement alignés, empilés dans
 l'ordre physique défini par `layerOrder` (`src/lib/parts.ts`) :
 
 ```
-bracelet → boîtier → cadran → lunette → aiguilles
+bracelet → boîtier → cadran → lunette → aiguilles → trotteuse
 ```
 
-Ajouter une variante = déposer le PNG dans `public/parts/<catégorie>/` puis ajouter
-une entrée dans la catégorie correspondante de `categories`. Aucun autre fichier à toucher.
+Le cadran passe **au-dessus** du boîtier : les boîtiers ont un fond intérieur opaque
+qui le masquerait s'il était dessiné en dessous.
+
+Catalogue actuel : 16 boîtiers, 15 lunettes (dont « Aucune », qui conserve la lunette
+d'origine du boîtier), 20 cadrans, 14 jeux d'aiguilles, 16 trotteuses, 25 bracelets.
+
+Ajouter une variante = déposer le PNG 1000 × 1000 dans `public/parts/<catégorie>/`
+(`case`, `bezel`, `dial`, `hands`, `seconds`, `bracelet`) puis ajouter une entrée dans
+la catégorie correspondante de `categories`, avec son `group` (famille affichée en
+sous-titre). Aucun autre fichier à toucher.
 
 Les variantes de la catégorie ouverte sont préchargées en opacité 0 : changer de pièce
 est instantané, sans clignotement.

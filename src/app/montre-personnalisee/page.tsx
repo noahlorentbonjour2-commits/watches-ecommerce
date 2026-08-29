@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import Configurator from "@/components/configurator/Configurator";
+import { combinationCount } from "@/lib/parts";
 
 export const metadata: Metadata = {
   title: "Montre personnalisée",
   description:
-    "Composez votre montre My Dial : boîtier, lunette, cadran, aiguilles et bracelet. L'aperçu se met à jour en direct.",
+    "Composez votre montre My Dial : boîtier, lunette, cadran, aiguilles, trotteuse et bracelet. L'aperçu se met à jour en direct.",
 };
 
 export default function MontrePersonnaliseePage() {
@@ -27,9 +28,13 @@ export default function MontrePersonnaliseePage() {
           </h1>
           <span aria-hidden="true" className="rule-gold mt-6 block h-px w-24" />
           <p className="mt-6 text-base leading-relaxed text-silver-300">
-            Cinq composants, des centaines de combinaisons. Sélectionnez chaque
-            pièce : l&apos;aperçu se recompose en direct, exactement comme votre
-            montre sortira de l&apos;atelier.
+            Six composants, plus de{" "}
+            {new Intl.NumberFormat("fr-FR").format(
+              Math.floor(combinationCount / 1_000_000),
+            )}{" "}
+            millions de combinaisons. Sélectionnez chaque pièce :
+            l&apos;aperçu se recompose en direct, exactement comme votre montre
+            sortira de l&apos;atelier.
           </p>
         </header>
 
