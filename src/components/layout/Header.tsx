@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState, useSyncExternalStore } from "react";
+import AnnouncementBar from "./AnnouncementBar";
 
 /** Abonnement au défilement, sans setState dans un effet. */
 const subscribeToScroll = (onChange: () => void) => {
@@ -52,12 +53,21 @@ export default function Header() {
 
   return (
     <header
+      // Le ruban se replie au défilement : on translate l'en-tête plutôt que
+      // d'animer une hauteur (pas de recalcul de mise en page). `-translate-y-9`
+      // vaut exactement le `h-9` du ruban, donc la barre de navigation vient
+      // affleurer le haut de l'écran et les décalages des éléments collants
+      // restent ceux de l'en-tête seul.
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
+        scrolled ? "-translate-y-9" : "translate-y-0"
+      } ${
         scrolled || open
           ? "border-b border-white/8 bg-ink/85 backdrop-blur-xl"
           : "border-b border-transparent bg-transparent"
       }`}
     >
+      <AnnouncementBar />
+
       <div className="mx-auto flex h-20 w-full max-w-7xl items-center justify-between px-5 sm:px-8">
         <Link
           href="/"

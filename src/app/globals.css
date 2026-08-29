@@ -26,10 +26,18 @@
 
   /* ── Animations ───────────────────────────────────────────── */
   --animate-shimmer: shimmer 2.6s linear infinite;
+  --animate-marquee: marquee 42s linear infinite;
 
   @keyframes shimmer {
     0% { background-position: -200% 0; }
     100% { background-position: 200% 0; }
+  }
+
+  /* Le ruban contient deux copies identiques : translater de -50 %
+     ramène exactement la seconde à la place de la première. */
+  @keyframes marquee {
+    from { transform: translate3d(0, 0, 0); }
+    to { transform: translate3d(-50%, 0, 0); }
   }
 }
 
