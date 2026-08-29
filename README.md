@@ -74,6 +74,17 @@ sous-titre). Aucun autre fichier à toucher.
 Les variantes de la catégorie ouverte sont préchargées en opacité 0 : changer de pièce
 est instantané, sans clignotement.
 
+### Compatibilité entre composants
+
+La lunette rapportée n'existe que sur les boîtiers **Sub** (`bezelCompatibleCases` dans
+`src/lib/parts.ts`) ; les autres portent une lunette solidaire du boîtier. Concrètement :
+l'onglet Lunette est désactivé hors Sub, une note explique pourquoi, et
+`normalizeConfiguration()` remet la lunette à « Aucune » dès qu'on passe sur un boîtier
+incompatible. `combinationCount` tient compte de la contrainte.
+
+Pour ajouter une règle du même type, étendre `normalizeConfiguration()` : c'est le seul
+point où une configuration est ramenée dans le domaine du valide.
+
 La validation est un simple récapitulatif — aucun paiement n'est branché.
 
 ## Images

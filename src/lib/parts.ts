@@ -233,6 +233,34 @@ export const categories: PartCategory[] = [
 
 export type Configuration = Record<PartCategoryId, string>;
 
+/* ── Compatibilité entre composants ─────────────────────────────────────── */
+
+/**
+ * Seuls les boîtiers de la famille Sub reçoivent un insert de lunette
+ * rapporté. Les autres (Datejust, Intégrale, Architecte, Joaillerie) portent
+ * une lunette solidaire du boîtier : y superposer un insert la masquerait.
+ */
+export const bezelCompatibleCases = new Set([
+  "sub-acier",
+  "sub-noir",
+  "sub-or-rose",
+  "sub-or",
+]);
+
+export const supportsBezel = (caseId: string) => bezelCompatibleCases.has(caseId);
+
+/** Option de repli imposée quand la lunette n'est pas disponible. */
+export const NO_BEZEL = "aucune";
+
+/**
+ * Ramène une configuration dans le domaine du valide. À appliquer après chaque
+ * choix : changer pour un boîtier sans insert remet la lunette à « Aucune ».
+ */
+export const normalizeConfiguration = (config: Configuration): Configuration =>
+  supportsBezel(config.case) || config.bezel === NO_BEZEL
+    ? config
+    : { ...config, bezel: NO_BEZEL };
+
 export const defaultConfiguration: Configuration = {
   case: "dj39-acier",
   bezel: "aucune",
@@ -267,8 +295,20 @@ export const totalPrice = (config: Configuration) =>
     BASE_PRICE,
   );
 
-/** Nombre de combinaisons possibles, pour l'accroche marketing. */
-export const combinationCount = categories.reduce(
-  (product, category) => product * category.options.length,
-  1,
-);
+/**
+ * Nombre de combinaisons réellement atteignables, contrainte de lunette
+ * comprise : un boîtier Sub ouvre les 15 lunettes, les autres n'en ont qu'une
+ * (« Aucune »).
+ */
+export const combinationCount = (() => {
+  const count = (id: PartCategoryId) => categoryById(id).options.length;
+
+  const casesWithBezel = categoryById("case").options.reduce(
+    (sum, option) => sum + (supportsBezel(option.id) ? count("bezel") : 1),
+    0,
+  );
+
+  return (
+    casesWithBezel * count("dial") * count("hands") * count("seconds") * count("bracelet")
+  );
+})();

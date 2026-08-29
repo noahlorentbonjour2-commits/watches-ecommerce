@@ -12,7 +12,9 @@ import {
   defaultConfiguration,
   groupedOptions,
   layerOrder,
+  normalizeConfiguration,
   optionFor,
+  supportsBezel,
   totalPrice,
   type Configuration,
   type PartCategoryId,
@@ -25,9 +27,23 @@ export default function Configurator() {
   const tabsRef = useRef<(HTMLButtonElement | null)[]>([]);
 
   const select = useCallback((categoryId: PartCategoryId, optionId: string) => {
-    setConfig((previous) => ({ ...previous, [categoryId]: optionId }));
+    // Normalise après chaque choix : passer sur un boîtier sans insert remet
+    // la lunette à « Aucune ».
+    setConfig((previous) =>
+      normalizeConfiguration({ ...previous, [categoryId]: optionId }),
+    );
     setValidated(false);
   }, []);
+
+  const bezelAvailable = supportsBezel(config.case);
+
+  // Onglet réellement affiché : si la lunette devient indisponible pendant
+  // qu'on la consulte (réinitialisation notamment), on retombe sur le boîtier
+  // sans avoir à synchroniser un état supplémentaire.
+  const currentTab =
+    activeTab === "bezel" && !bezelAvailable ? "case" : activeTab;
+  const isDisabled = (categoryId: PartCategoryId) =>
+    categoryId === "bezel" && !bezelAvailable;
 
   const reset = () => {
     setConfig(defaultConfiguration);
@@ -46,7 +62,12 @@ export default function Configurator() {
     if (target === undefined) return;
 
     event.preventDefault();
-    const next = (target + categories.length) % categories.length;
+    const step = event.key === "ArrowLeft" ? -1 : 1;
+    let next = (target + categories.length) % categories.length;
+    // Saute les onglets désactivés plutôt que d'y coincer le focus.
+    while (isDisabled(categories[next].id)) {
+      next = (next + step + categories.length) % categories.length;
+    }
     setActiveTab(categories[next].id);
     tabsRef.current[next]?.focus();
   };
@@ -112,7 +133,8 @@ export default function Configurator() {
           className="flex flex-wrap gap-2 border-b border-white/10 pb-4"
         >
           {categories.map((category, index) => {
-            const active = category.id === activeTab;
+            const active = category.id === currentTab;
+            const disabled = isDisabled(category.id);
             return (
               <button
                 key={category.id}
@@ -123,13 +145,17 @@ export default function Configurator() {
                 id={`onglet-${category.id}`}
                 aria-selected={active}
                 aria-controls={`panneau-${category.id}`}
+                aria-describedby={disabled ? "lunette-indisponible" : undefined}
+                disabled={disabled}
                 tabIndex={active ? 0 : -1}
                 onClick={() => setActiveTab(category.id)}
                 onKeyDown={(event) => onTabKeyDown(event, index)}
-                className={`min-h-11 cursor-pointer border px-4 py-2.5 text-[0.62rem] uppercase tracking-[0.14em] transition-all duration-300 ${
-                  active
-                    ? "border-gold-500 bg-gold-500/12 text-gold-400"
-                    : "border-white/12 text-silver-500 hover:border-white/30 hover:text-cream"
+                className={`min-h-11 border px-4 py-2.5 text-[0.62rem] uppercase tracking-[0.14em] transition-all duration-300 ${
+                  disabled
+                    ? "cursor-not-allowed border-white/8 text-silver-500/40"
+                    : active
+                      ? "cursor-pointer border-gold-500 bg-gold-500/12 text-gold-400"
+                      : "cursor-pointer border-white/12 text-silver-500 hover:border-white/30 hover:text-cream"
                 }`}
               >
                 {category.label}
@@ -138,13 +164,24 @@ export default function Configurator() {
           })}
         </div>
 
+        {!bezelAvailable ? (
+          <p
+            id="lunette-indisponible"
+            className="mt-4 border-l-2 border-gold-600/50 bg-navy-950/60 py-2.5 pl-4 text-xs leading-relaxed text-silver-300"
+          >
+            La lunette interchangeable est réservée aux boîtiers{" "}
+            <strong className="font-medium text-gold-400">Sub</strong> : les
+            autres portent une lunette solidaire du boîtier.
+          </p>
+        ) : null}
+
         {categories.map((category) => (
           <div
             key={category.id}
             role="tabpanel"
             id={`panneau-${category.id}`}
             aria-labelledby={`onglet-${category.id}`}
-            hidden={category.id !== activeTab}
+            hidden={category.id !== currentTab}
             tabIndex={0}
             className="pt-7"
           >
