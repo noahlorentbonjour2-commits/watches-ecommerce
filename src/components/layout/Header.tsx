@@ -53,14 +53,10 @@ export default function Header() {
 
   return (
     <header
-      // Le ruban se replie au défilement : on translate l'en-tête plutôt que
-      // d'animer une hauteur (pas de recalcul de mise en page). `-translate-y-9`
-      // vaut exactement le `h-9` du ruban, donc la barre de navigation vient
-      // affleurer le haut de l'écran et les décalages des éléments collants
-      // restent ceux de l'en-tête seul.
+      // Le ruban reste visible en permanence : l'en-tête fait donc 116 px
+      // (36 px de ruban + 80 px de navigation). C'est cette hauteur que
+      // reprennent `scroll-padding-top` et les décalages des éléments collants.
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
-        scrolled ? "-translate-y-9" : "translate-y-0"
-      } ${
         scrolled || open
           ? "border-b border-white/8 bg-ink/85 backdrop-blur-xl"
           : "border-b border-transparent bg-transparent"

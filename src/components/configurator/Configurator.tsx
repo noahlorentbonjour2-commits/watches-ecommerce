@@ -58,7 +58,7 @@ export default function Configurator() {
       {/* ── Aperçu ─────────────────────────────────────────────── */}
       {/* Collant sur toutes les tailles : l'aperçu reste visible pendant
           qu'on fait défiler les sélecteurs, y compris sur mobile. */}
-      <div className="sticky top-[4.75rem] z-30 -mx-5 self-start bg-ink/95 px-5 pb-4 backdrop-blur-md sm:-mx-8 sm:px-8 lg:top-28 lg:mx-0 lg:bg-transparent lg:px-0 lg:pb-0 lg:backdrop-blur-none">
+      <div className="sticky top-28 z-30 -mx-5 self-start bg-ink/95 px-5 pb-4 backdrop-blur-md sm:-mx-8 sm:px-8 lg:top-[9.25rem] lg:mx-0 lg:bg-transparent lg:px-0 lg:pb-0 lg:backdrop-blur-none">
         <div className="border border-white/10 bg-[radial-gradient(circle_at_50%_40%,var(--color-navy-900)_0%,var(--color-navy-950)_70%)] p-4 sm:p-6 lg:p-8">
           <div className="mx-auto w-full max-w-[min(100%,30svh)] lg:max-w-none">
             <WatchPreview config={config} preloadCategory={activeTab} />

@@ -12,13 +12,10 @@ function Sequence() {
     <ul className="flex shrink-0 items-center">
       {track.map((message, index) => (
         <li key={index} className="flex items-center">
-          <span className="whitespace-nowrap px-6 text-[0.62rem] uppercase tracking-[0.22em] text-gold-400">
+          <span className="whitespace-nowrap px-6 text-[0.62rem] font-medium uppercase tracking-[0.22em] text-ink">
             {message}
           </span>
-          <span
-            aria-hidden="true"
-            className="size-1 rotate-45 bg-gold-600/70"
-          />
+          <span aria-hidden="true" className="size-1 rotate-45 bg-ink/45" />
         </li>
       ))}
     </ul>
@@ -38,9 +35,10 @@ export default function AnnouncementBar() {
     <div
       role="region"
       aria-label="Annonces My Dial"
-      // Hauteur figée (36 px + 1 px de filet) : l'en-tête s'appuie dessus pour
-      // se replier au défilement, elle ne doit pas dépendre du line-height.
-      className="group flex h-9 items-center overflow-hidden border-b border-gold-600/20 bg-navy-900 motion-reduce:overflow-x-auto"
+      // Hauteur figée à 36 px : les décalages des éléments collants et le
+      // scroll-padding des ancres s'appuient dessus, elle ne doit pas dépendre
+      // du line-height.
+      className="group flex h-9 items-center overflow-hidden bg-gold-500 motion-reduce:overflow-x-auto"
     >
       <div className="flex w-max animate-marquee hover:[animation-play-state:paused] motion-reduce:animate-none">
         <Sequence />
