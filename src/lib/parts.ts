@@ -78,6 +78,9 @@ export const categories: PartCategory[] = [
       { id: "oak-acier", label: "Octogone acier", group: "Intégrale", extra: 120, image: "/parts/case/oak-acier.png" },
 
       { id: "engineer-acier", label: "Engineer acier", group: "Architecte", extra: 40, image: "/parts/case/engineer-acier.png" },
+
+      { id: "chrono-rubis", label: "Chrono lunette rubis", group: "Joaillerie", extra: 340, image: "/parts/case/chrono-rubis.png" },
+      { id: "chrono-saphir", label: "Chrono lunette saphir", group: "Joaillerie", extra: 340, image: "/parts/case/chrono-saphir.png" },
     ],
   },
   {
