@@ -136,6 +136,9 @@ export const categories: PartCategory[] = [
 
       { id: "bronze-degrade-index-acier", label: "Bronze dégradé", group: "Dégradé", extra: 110, image: "/parts/dial/bronze-degrade-index-acier.png" },
       { id: "rouge-index-acier", label: "Rouge grenat", group: "Dégradé", extra: 110, image: "/parts/dial/rouge-index-acier.png" },
+
+      { id: "chrono-bleu-soleil", label: "Bleu soleil, 3 compteurs", group: "Chronographe", extra: 130, image: "/parts/dial/chrono-bleu-soleil.png" },
+      { id: "chrono-meteorite", label: "Météorite, 3 compteurs", group: "Chronographe", extra: 170, image: "/parts/dial/chrono-meteorite.png" },
     ],
   },
   {
