@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Configurator from "@/components/configurator/Configurator";
-import { combinationCount } from "@/lib/parts";
+import { combinationCount, startingPrice } from "@/lib/parts";
 
 export const metadata: Metadata = {
   title: "Montre personnalisée",
@@ -27,6 +27,19 @@ export default function MontrePersonnaliseePage() {
             <span className="italic text-gold-gradient">qui n&apos;existe pas.</span>
           </h1>
           <span aria-hidden="true" className="rule-gold mt-6 block h-px w-24" />
+
+          <p className="mt-6 flex flex-wrap items-baseline gap-x-3 gap-y-1">
+            <span className="text-[0.62rem] uppercase tracking-[0.18em] text-silver-500">
+              À partir de
+            </span>
+            <span className="font-serif text-3xl text-gold-400">
+              {new Intl.NumberFormat("fr-FR", {
+                style: "currency",
+                currency: "EUR",
+                maximumFractionDigits: 0,
+              }).format(startingPrice)}
+            </span>
+          </p>
           <p className="mt-6 text-base leading-relaxed text-silver-300">
             Six composants, plus de{" "}
             {new Intl.NumberFormat("fr-FR").format(

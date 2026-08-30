@@ -50,8 +50,6 @@ export const layerOrder: PartCategoryId[] = [
   "seconds",
 ];
 
-export const BASE_PRICE = 890;
-
 export const categories: PartCategory[] = [
   {
     id: "case",
@@ -299,11 +297,15 @@ export const groupedOptions = (category: PartCategory) => {
   return [...groups.entries()];
 };
 
+/** Le prix d'une montre est la somme de ses composants : pas de socle. */
 export const totalPrice = (config: Configuration) =>
   layerOrder.reduce(
     (sum, categoryId) => sum + optionFor(categoryId, config[categoryId]).extra,
-    BASE_PRICE,
+    0,
   );
+
+/** Prix de la configuration proposée à l'ouverture, pour les accroches. */
+export const startingPrice = totalPrice(defaultConfiguration);
 
 /**
  * Nombre de combinaisons réellement atteignables, contrainte de lunette

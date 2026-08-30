@@ -6,7 +6,6 @@ import OptionThumb from "./OptionThumb";
 import WatchPreview from "./WatchPreview";
 import Summary from "./Summary";
 import {
-  BASE_PRICE,
   categories,
   categoryById,
   defaultConfiguration,
@@ -209,12 +208,7 @@ export default function Configurator() {
           </div>
         ))}
 
-        <Summary
-          config={config}
-          basePrice={BASE_PRICE}
-          total={total}
-          validated={validated}
-        />
+        <Summary config={config} total={total} validated={validated} />
 
         <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
           <GoldButton

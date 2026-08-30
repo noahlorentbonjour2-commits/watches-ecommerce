@@ -7,7 +7,6 @@ import {
 
 type SummaryProps = {
   config: Configuration;
-  basePrice: number;
   total: number;
   validated: boolean;
 };
@@ -19,12 +18,7 @@ const euro = (value: number) =>
     maximumFractionDigits: 0,
   }).format(value);
 
-export default function Summary({
-  config,
-  basePrice,
-  total,
-  validated,
-}: SummaryProps) {
+export default function Summary({ config, total, validated }: SummaryProps) {
   return (
     <section
       aria-labelledby="recapitulatif-titre"
@@ -42,20 +36,13 @@ export default function Summary({
       </h2>
 
       <dl className="mt-6 divide-y divide-white/8">
-        <div className="flex items-baseline justify-between gap-4 pb-3.5">
-          <dt className="text-sm text-silver-300">
-            Base — mouvement automatique, verre saphir
-          </dt>
-          <dd className="shrink-0 text-sm text-cream">{euro(basePrice)}</dd>
-        </div>
-
         {layerOrder.map((categoryId) => {
           const category = categoryById(categoryId);
           const option = optionFor(categoryId, config[categoryId]);
           return (
             <div
               key={categoryId}
-              className="flex items-baseline justify-between gap-4 py-3.5"
+              className="flex items-baseline justify-between gap-4 py-3.5 first:pt-0"
             >
               <dt className="text-sm text-silver-300">
                 <span className="text-silver-500">{category.label} — </span>
@@ -74,8 +61,9 @@ export default function Summary({
         </div>
       </dl>
 
-      <p className="mt-5 text-xs text-silver-500">
-        Livraison offerte en France — délai d&apos;assemblage 10 jours ouvrés.
+      <p className="mt-5 text-xs leading-relaxed text-silver-500">
+        Mouvement automatique et verre saphir bombé compris. Livraison offerte en
+        France — délai d&apos;assemblage 10 jours ouvrés.
       </p>
     </section>
   );
