@@ -81,6 +81,8 @@ export const categories: PartCategory[] = [
 
       { id: "chrono-rubis", label: "Chrono lunette rubis", group: "Joaillerie", extra: 340, image: "/parts/case/chrono-rubis.png" },
       { id: "chrono-saphir", label: "Chrono lunette saphir", group: "Joaillerie", extra: 340, image: "/parts/case/chrono-saphir.png" },
+      { id: "chrono-arc-en-ciel-acier", label: "Chrono arc-en-ciel acier", group: "Joaillerie", extra: 680, image: "/parts/case/chrono-arc-en-ciel-acier.png" },
+      { id: "chrono-arc-en-ciel-or-rose", label: "Chrono arc-en-ciel or rose", group: "Joaillerie", extra: 720, image: "/parts/case/chrono-arc-en-ciel-or-rose.png" },
     ],
   },
   {
@@ -139,6 +141,14 @@ export const categories: PartCategory[] = [
 
       { id: "chrono-bleu-soleil", label: "Bleu soleil, 3 compteurs", group: "Chronographe", extra: 130, image: "/parts/dial/chrono-bleu-soleil.png" },
       { id: "chrono-meteorite", label: "Météorite, 3 compteurs", group: "Chronographe", extra: 170, image: "/parts/dial/chrono-meteorite.png" },
+      { id: "chrono-pierres", label: "Index pierres, 3 compteurs", group: "Chronographe", extra: 260, image: "/parts/dial/chrono-pierres.png" },
+      { id: "chrono-mappemonde", label: "Mappemonde, 3 compteurs", group: "Chronographe", extra: 290, image: "/parts/dial/chrono-mappemonde.png" },
+
+      { id: "arabe-argente", label: "Argenté soleillé", group: "Chiffres arabes", extra: 70, image: "/parts/dial/arabe-argente.png" },
+      { id: "arabe-noir", label: "Noir laqué", group: "Chiffres arabes", extra: 70, image: "/parts/dial/arabe-noir.png" },
+      { id: "arabe-bleu", label: "Bleu nuit soleillé", group: "Chiffres arabes", extra: 80, image: "/parts/dial/arabe-bleu.png" },
+      { id: "arabe-vert", label: "Vert soleillé", group: "Chiffres arabes", extra: 80, image: "/parts/dial/arabe-vert.png" },
+      { id: "arabe-rose", label: "Rose poudré", group: "Chiffres arabes", extra: 80, image: "/parts/dial/arabe-rose.png" },
     ],
   },
   {
