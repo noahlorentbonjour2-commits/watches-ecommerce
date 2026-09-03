@@ -147,6 +147,22 @@ export const categories: PartCategory[] = [
       { id: "arabe-bleu", label: "Bleu nuit soleillé", group: "Chiffres arabes", extra: 30, image: "/parts/dial/arabe-bleu.png" },
       { id: "arabe-vert", label: "Vert soleillé", group: "Chiffres arabes", extra: 30, image: "/parts/dial/arabe-vert.png" },
       { id: "arabe-rose", label: "Rose poudré", group: "Chiffres arabes", extra: 30, image: "/parts/dial/arabe-rose.png" },
+
+      { id: "roman-blanc", label: "Blanc, chiffres romains", group: "Chiffres romains", extra: 30, image: "/parts/dial/roman-blanc.png" },
+
+      { id: "sub-turquoise", label: "Submariner turquoise", group: "Plongée", extra: 30, image: "/parts/dial/sub-turquoise.png" },
+      { id: "marine-blanc", label: "Marine Master blanc", group: "Plongée", extra: 30, image: "/parts/dial/marine-blanc.png" },
+      { id: "marine-gris", label: "Marine Master gris", group: "Plongée", extra: 30, image: "/parts/dial/marine-gris.png" },
+      { id: "marine-bleu", label: "Marine Master bleu", group: "Plongée", extra: 30, image: "/parts/dial/marine-bleu.png" },
+      { id: "marine-vert", label: "Marine Master vert", group: "Plongée", extra: 30, image: "/parts/dial/marine-vert.png" },
+      { id: "marine-rouge", label: "Marine Master rouge", group: "Plongée", extra: 30, image: "/parts/dial/marine-rouge.png" },
+      { id: "marine-noir-acier", label: "Marine Master noir, index acier", group: "Plongée", extra: 30, image: "/parts/dial/marine-noir-acier.png" },
+      { id: "marine-noir-or", label: "Marine Master noir, index or", group: "Plongée", extra: 30, image: "/parts/dial/marine-noir-or.png" },
+      { id: "marine-noir-or-rose", label: "Marine Master noir, index or rose", group: "Plongée", extra: 30, image: "/parts/dial/marine-noir-or-rose.png" },
+
+      { id: "gmt-noir-acier", label: "GMT noir, index acier", group: "GMT", extra: 30, image: "/parts/dial/gmt-noir-acier.png" },
+      { id: "gmt-noir-or", label: "GMT noir, index or", group: "GMT", extra: 30, image: "/parts/dial/gmt-noir-or.png" },
+      { id: "gmt-noir-or-rose", label: "GMT noir, index or rose", group: "GMT", extra: 30, image: "/parts/dial/gmt-noir-or-rose.png" },
     ],
   },
   {

@@ -64,7 +64,7 @@ Le cadran passe **au-dessus** du boîtier : les boîtiers ont un fond intérieur
 qui le masquerait s'il était dessiné en dessous.
 
 Catalogue actuel : 20 boîtiers, 15 lunettes (dont « Aucune », qui conserve la lunette
-d'origine du boîtier), 29 cadrans, 14 jeux d'aiguilles, 16 trotteuses, 25 bracelets.
+d'origine du boîtier), 42 cadrans, 14 jeux d'aiguilles, 16 trotteuses, 25 bracelets.
 
 Ajouter une variante = déposer le PNG 1000 × 1000 dans `public/parts/<catégorie>/`
 (`case`, `bezel`, `dial`, `hands`, `seconds`, `bracelet`) puis ajouter une entrée dans
