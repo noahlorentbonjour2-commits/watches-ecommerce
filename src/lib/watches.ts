@@ -21,7 +21,7 @@ export const watches: Watch[] = [
     collection: "Signature",
     description:
       "Cadran bleu nuit guilloché, index arabes appliqués et lunette cannelée. La pièce qui a donné son nom à la maison.",
-    price: 1290,
+    price: 190,
     image: "/collection/bleu-imperial.png",
     finish: "Acier",
     featured: true,
@@ -32,7 +32,7 @@ export const watches: Watch[] = [
     collection: "Intégrale",
     description:
       "Boîtier octogonal et bracelet intégré en or rose, cadran tapisserie noir profond.",
-    price: 1490,
+    price: 180,
     image: "/collection/royal-or-rose.png",
     finish: "Or rose",
   },
@@ -42,7 +42,7 @@ export const watches: Watch[] = [
     collection: "Intégrale",
     description:
       "Cadran embossé bleu dégradé, boîtier coussin acier brossé et poli main.",
-    price: 1390,
+    price: 160,
     image: "/collection/nautilus-bleu-nuit.png",
     finish: "Acier",
   },
@@ -52,7 +52,7 @@ export const watches: Watch[] = [
     collection: "Voyageur",
     description:
       "Lunette bicolore brun et or rose, aiguille 24 h pour lire un second fuseau d'un regard.",
-    price: 1450,
+    price: 140,
     image: "/collection/gmt-rootbeer.png",
     finish: "Bicolore",
   },
@@ -62,7 +62,7 @@ export const watches: Watch[] = [
     collection: "Piste",
     description:
       "Cadran laqué blanc, compteurs noirs et lunette céramique. Un classique de la course automobile.",
-    price: 1520,
+    price: 150,
     image: "/collection/chrono-panda.png",
     finish: "Acier",
   },
@@ -72,7 +72,7 @@ export const watches: Watch[] = [
     collection: "Piste",
     description:
       "Chronographe habillé d'or rose, cadran chocolat et bracelet caoutchouc texturé.",
-    price: 1560,
+    price: 150,
     image: "/collection/chrono-or-rose.png",
     finish: "Or rose",
   },
@@ -82,7 +82,7 @@ export const watches: Watch[] = [
     collection: "Signature",
     description:
       "Cadran bleu glacier nacré, chiffres arabes appliqués et bracelet jubilé cinq maillons.",
-    price: 1320,
+    price: 190,
     image: "/collection/glacier-arabic.png",
     finish: "Acier",
   },
@@ -92,7 +92,7 @@ export const watches: Watch[] = [
     collection: "Signature",
     description:
       "Cadran noir onyx mat, lunette cannelée et bracelet oyster 36 mm. La sobriété absolue.",
-    price: 1280,
+    price: 190,
     image: "/collection/onyx-arabic.png",
     finish: "Acier",
   },
@@ -102,7 +102,7 @@ export const watches: Watch[] = [
     collection: "Signature",
     description:
       "Cadran rose poudré soleillé, index arabes fins. Un boîtier 36 mm pensé pour tous les poignets.",
-    price: 1280,
+    price: 190,
     image: "/collection/rose-poudre.png",
     finish: "Acier",
   },
@@ -112,7 +112,7 @@ export const watches: Watch[] = [
     collection: "Voyageur",
     description:
       "Boîtier coussin or rose et bracelet caoutchouc bordeaux, cadran brun texturé tropical.",
-    price: 1470,
+    price: 140,
     image: "/collection/aquanaut-or-rose.png",
     finish: "Or rose",
   },
@@ -122,7 +122,7 @@ export const watches: Watch[] = [
     collection: "Architecte",
     description:
       "Boîtier carré acier, cadran opalin, chiffres romains et aiguilles bleuies à la flamme.",
-    price: 1340,
+    price: 190,
     image: "/collection/carre-blanc.png",
     finish: "Acier",
   },
@@ -132,7 +132,7 @@ export const watches: Watch[] = [
     collection: "Architecte",
     description:
       "Cadran ajouré laissant apparaître le mouvement automatique et sa masse oscillante.",
-    price: 1590,
+    price: 200,
     image: "/collection/squelette.png",
     finish: "Acier",
   },
