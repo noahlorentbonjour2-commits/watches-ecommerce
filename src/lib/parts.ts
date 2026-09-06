@@ -73,9 +73,6 @@ export const categories: PartCategory[] = [
       { id: "nautilus-noir", label: "Horizon noir mat", group: "Intégrale", extra: 60, image: "/parts/case/nautilus-noir.png" },
       { id: "nautilus-or-rose", label: "Horizon or rose", group: "Intégrale", extra: 60, image: "/parts/case/nautilus-or-rose.png" },
       { id: "nautilus-or", label: "Horizon or jaune", group: "Intégrale", extra: 60, image: "/parts/case/nautilus-or.png" },
-      { id: "oak-acier", label: "Octogone acier", group: "Intégrale", extra: 60, image: "/parts/case/oak-acier.png" },
-
-      { id: "engineer-acier", label: "Engineer acier", group: "Architecte", extra: 60, image: "/parts/case/engineer-acier.png" },
 
       { id: "chrono-rubis", label: "Chrono lunette rubis", group: "Joaillerie", extra: 80, image: "/parts/case/chrono-rubis.png" },
       { id: "chrono-saphir", label: "Chrono lunette saphir", group: "Joaillerie", extra: 80, image: "/parts/case/chrono-saphir.png" },
@@ -261,7 +258,7 @@ export type Configuration = Record<PartCategoryId, string>;
 
 /**
  * Seuls les boîtiers de la famille Sub reçoivent un insert de lunette
- * rapporté. Les autres (Datejust, Intégrale, Architecte, Joaillerie) portent
+ * rapporté. Les autres (Datejust, Intégrale, Joaillerie) portent
  * une lunette solidaire du boîtier : y superposer un insert la masquerait.
  */
 export const bezelCompatibleCases = new Set([
