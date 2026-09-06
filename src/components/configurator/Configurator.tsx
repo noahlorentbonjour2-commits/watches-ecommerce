@@ -2,6 +2,7 @@
 
 import { useCallback, useRef, useState } from "react";
 import { GoldButton } from "@/components/ui/GoldButton";
+import BoutonPaiement from "@/components/ui/BoutonPaiement";
 import OptionThumb from "./OptionThumb";
 import WatchPreview from "./WatchPreview";
 import Summary from "./Summary";
@@ -19,10 +20,16 @@ import {
   type PartCategoryId,
 } from "@/lib/parts";
 
+const euro = (montant: number) =>
+  new Intl.NumberFormat("fr-FR", {
+    style: "currency",
+    currency: "EUR",
+    maximumFractionDigits: 0,
+  }).format(montant);
+
 export default function Configurator() {
   const [config, setConfig] = useState<Configuration>(defaultConfiguration);
   const [activeTab, setActiveTab] = useState<PartCategoryId>("case");
-  const [validated, setValidated] = useState(false);
   const tabsRef = useRef<(HTMLButtonElement | null)[]>([]);
 
   const select = useCallback((categoryId: PartCategoryId, optionId: string) => {
@@ -31,7 +38,6 @@ export default function Configurator() {
     setConfig((previous) =>
       normalizeConfiguration({ ...previous, [categoryId]: optionId }),
     );
-    setValidated(false);
   }, []);
 
   const bezelAvailable = supportsBezel(config.case);
@@ -44,10 +50,7 @@ export default function Configurator() {
   const isDisabled = (categoryId: PartCategoryId) =>
     categoryId === "bezel" && !bezelAvailable;
 
-  const reset = () => {
-    setConfig(defaultConfiguration);
-    setValidated(false);
-  };
+  const reset = () => setConfig(defaultConfiguration);
 
   // Navigation clavier entre les onglets (flèches, Début, Fin).
   const onTabKeyDown = (event: React.KeyboardEvent, index: number) => {
@@ -94,11 +97,7 @@ export default function Configurator() {
               </p>
             </div>
             <p className="font-serif text-2xl text-gold-400 lg:text-3xl">
-              {new Intl.NumberFormat("fr-FR", {
-                style: "currency",
-                currency: "EUR",
-                maximumFractionDigits: 0,
-              }).format(total)}
+              {euro(total)}
             </p>
           </div>
         </div>
@@ -208,31 +207,23 @@ export default function Configurator() {
           </div>
         ))}
 
-        <Summary config={config} total={total} validated={validated} />
+        <Summary config={config} total={total} />
 
-        <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
-          <GoldButton
-            type="button"
-            onClick={() => setValidated(true)}
+        <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-start">
+          <BoutonPaiement
+            payload={() => ({ type: "configuration", config })}
             className="sm:flex-1"
           >
-            Valider ma montre
-          </GoldButton>
+            Commander — {euro(total)}
+          </BoutonPaiement>
           <GoldButton type="button" variant="outline" onClick={reset}>
             Réinitialiser
           </GoldButton>
         </div>
 
         <p className="mt-4 text-xs leading-relaxed text-silver-500">
-          Aucun paiement à cette étape : la validation enregistre votre
-          configuration et un horloger vous rappelle sous 24 h pour finaliser la
-          commande.
-        </p>
-
-        <p aria-live="polite" className="mt-3 min-h-5 text-sm text-gold-400">
-          {validated
-            ? "Configuration validée. Retrouvez le récapitulatif complet ci-dessus."
-            : ""}
+          Paiement sécurisé par Stripe. Un horloger confirme chaque pièce de
+          votre configuration sous 24 h ouvrées avant de lancer l&apos;assemblage.
         </p>
       </div>
     </div>

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import BoutonPaiement from "@/components/ui/BoutonPaiement";
 import { formatPrice, type Watch } from "@/lib/watches";
 
 type WatchCardProps = {
@@ -35,9 +36,18 @@ export default function WatchCard({ watch, eager = false }: WatchCardProps) {
         <p className="text-sm leading-relaxed text-silver-500">
           {watch.description}
         </p>
-        <p className="mt-auto pt-3 text-[0.62rem] uppercase tracking-[0.18em] text-silver-500">
+        <p className="pt-1 text-[0.62rem] uppercase tracking-[0.18em] text-silver-500">
           Finition {watch.finish}
         </p>
+
+        <div className="mt-auto pt-5">
+          <BoutonPaiement
+            payload={() => ({ type: "modele", slug: watch.slug })}
+            variant="outline"
+          >
+            Commander
+          </BoutonPaiement>
+        </div>
       </div>
     </article>
   );

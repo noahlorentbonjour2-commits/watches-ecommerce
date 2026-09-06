@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Cormorant_Garamond, Montserrat } from "next/font/google";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import { siteUrl } from "@/lib/site";
 import "./globals.css";
 
 const cormorant = Cormorant_Garamond({
@@ -18,9 +19,7 @@ const montserrat = Montserrat({
   display: "swap",
 });
 
-/** Défini sur Vercel via NEXT_PUBLIC_SITE_URL, sinon valeur de repli. */
-export const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://my-dial.vercel.app";
+
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

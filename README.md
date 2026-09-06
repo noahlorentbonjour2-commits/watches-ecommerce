@@ -93,6 +93,22 @@ Tous les visuels proviennent des photos de production (`public/brand`, `public/c
 `public/parts`, `public/avis`) et sont servis via `next/image` (AVIF/WebP, tailles
 responsives). Aucun visuel n'est généré.
 
+## Paiement
+
+Le paiement passe par **Stripe Checkout** : le client est redirigé vers une page
+hébergée par Stripe, le site ne voit jamais de données bancaires.
+
+- `POST /api/checkout` construit la session. Le client n'envoie que des
+  identifiants (configuration ou slug de modèle) : **le montant est recalculé
+  côté serveur** depuis `parts.ts` / `watches.ts`, et une option inconnue est
+  rejetée en 400. La contrainte de lunette est réappliquée au passage.
+- `POST /api/stripe/webhook` vérifie la signature sur le corps brut, puis envoie
+  le détail de la commande par e-mail à `ORDER_NOTIFICATION_EMAIL`.
+- Le détail est aussi écrit dans les métadonnées de la session, donc lisible au
+  tableau de bord Stripe même sans service d'e-mail.
+
+Variables à renseigner : voir `.env.example`.
+
 ## Déploiement (Vercel)
 
 1. Pousser le dépôt sur GitHub, puis « Import Project » sur Vercel.

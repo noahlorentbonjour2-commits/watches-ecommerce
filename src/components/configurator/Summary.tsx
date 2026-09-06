@@ -8,7 +8,6 @@ import {
 type SummaryProps = {
   config: Configuration;
   total: number;
-  validated: boolean;
 };
 
 const euro = (value: number) =>
@@ -18,15 +17,11 @@ const euro = (value: number) =>
     maximumFractionDigits: 0,
   }).format(value);
 
-export default function Summary({ config, total, validated }: SummaryProps) {
+export default function Summary({ config, total }: SummaryProps) {
   return (
     <section
       aria-labelledby="recapitulatif-titre"
-      className={`mt-10 border p-7 transition-colors duration-500 sm:p-8 ${
-        validated
-          ? "border-gold-500/60 bg-gold-500/6"
-          : "border-white/10 bg-navy-950/50"
-      }`}
+      className="mt-10 border border-white/10 bg-navy-950/50 p-7 sm:p-8"
     >
       <h2
         id="recapitulatif-titre"
