@@ -16,7 +16,7 @@ const steps = [
   {
     number: "03",
     title: "Contrôle & livraison",
-    text: "72 heures de test de marche, contrôle d'étanchéité, puis écrin numéroté livré sous 10 jours ouvrés.",
+    text: "72 heures de test de marche, contrôle d'étanchéité, puis écrin numéroté livré sous 15 à 20 jours.",
   },
 ];
 

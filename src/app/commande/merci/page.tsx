@@ -36,7 +36,7 @@ export default function MerciPage() {
         avant de lancer l&apos;assemblage.
       </p>
       <p className="mt-3 text-sm text-silver-500">
-        Comptez 10 jours ouvrés, livraison offerte en France.
+        Comptez 15 à 20 jours, livraison offerte en France.
       </p>
 
       <div className="mt-10 flex flex-col gap-4 sm:flex-row">

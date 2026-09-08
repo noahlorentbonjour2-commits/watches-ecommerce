@@ -27,7 +27,7 @@ const reviews = [
   {
     image: "/avis/client-7.jpg",
     quote:
-      "Livrée en huit jours, écrin numéroté, réglage parfait dès la sortie de boîte.",
+      "Livrée dans les délais annoncés, écrin numéroté, réglage parfait dès la sortie de boîte.",
     author: "Julien M.",
     model: "Royal Or Rose",
   },

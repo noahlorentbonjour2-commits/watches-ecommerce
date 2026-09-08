@@ -58,7 +58,7 @@ export default function Summary({ config, total }: SummaryProps) {
 
       <p className="mt-5 text-xs leading-relaxed text-silver-500">
         Mouvement automatique et verre saphir bombé compris. Livraison offerte en
-        France — délai d&apos;assemblage 10 jours ouvrés.
+        France — délai d&apos;assemblage 15 à 20 jours.
       </p>
     </section>
   );
