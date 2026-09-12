@@ -6,7 +6,7 @@ import SectionHeading from "@/components/ui/SectionHeading";
 import WatchCard from "./WatchCard";
 import { watches } from "@/lib/watches";
 
-const filters = ["Toutes", "Acier", "Or rose", "Bicolore"] as const;
+const filters = ["Toutes", "Acier", "Noir", "Or rose", "Bicolore"] as const;
 type Filter = (typeof filters)[number];
 
 export default function CollectionGrid() {
@@ -30,7 +30,7 @@ export default function CollectionGrid() {
         <div id="collection-titre">
           <SectionHeading
             eyebrow="La collection"
-            title="Douze pièces, une seule obsession"
+            title={`${watches.length} pièces, une seule obsession`}
             description="Chaque référence est produite en série limitée. Mouvement automatique, verre saphir bombé et finitions appliquées à la main dans notre atelier."
           />
         </div>
