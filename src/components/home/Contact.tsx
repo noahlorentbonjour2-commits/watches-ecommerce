@@ -203,10 +203,10 @@ export default function Contact() {
                   </dt>
                   <dd className="mt-1.5">
                     <a
-                      href="mailto:bonjour@mydial.fr"
+                      href="mailto:mydial77@gmail.com"
                       className="text-gold-400 transition-colors hover:text-gold-500"
                     >
-                      bonjour@mydial.fr
+                      mydial77@gmail.com
                     </a>
                   </dd>
                 </div>
