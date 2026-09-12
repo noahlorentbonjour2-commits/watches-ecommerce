@@ -1,10 +1,6 @@
 import type Stripe from "stripe";
-import { Resend } from "resend";
+import { sendMail } from "@/lib/mail";
 import { getStripe } from "@/lib/stripe";
-
-/** Adresse qui reçoit le détail des commandes. */
-const DESTINATAIRE =
-  process.env.ORDER_NOTIFICATION_EMAIL ?? "mydial77@gmail.com";
 
 const euro = (centimes: number) =>
   new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR" }).format(
@@ -57,23 +53,16 @@ function corpsHtml(session: Stripe.Checkout.Session) {
 }
 
 async function notifier(session: Stripe.Checkout.Session) {
-  const cle = process.env.RESEND_API_KEY;
-  if (!cle) {
-    // Sans service d'e-mail, Stripe reste la source de vérité : la commande
-    // est visible au tableau de bord avec ses métadonnées.
-    console.warn("RESEND_API_KEY absente — notification e-mail non envoyée.");
-    return;
-  }
-
-  const { error } = await new Resend(cle).emails.send({
-    from: process.env.ORDER_EMAIL_FROM ?? "My Dial <onboarding@resend.dev>",
-    to: DESTINATAIRE,
-    replyTo: session.customer_details?.email ?? undefined,
+  // Sans service d'e-mail, Stripe reste la source de vérité : la commande est
+  // visible au tableau de bord avec ses métadonnées. On ne fait donc pas
+  // échouer le webhook.
+  const { ok, raison } = await sendMail({
     subject: `Commande ${euro(session.amount_total ?? 0)} — ${session.customer_details?.name ?? "client"}`,
+    replyTo: session.customer_details?.email ?? undefined,
     html: corpsHtml(session),
   });
 
-  if (error) console.error("Envoi de la notification impossible", error);
+  if (!ok) console.warn("Notification de commande non envoyée :", raison);
 }
 
 export async function POST(request: Request) {

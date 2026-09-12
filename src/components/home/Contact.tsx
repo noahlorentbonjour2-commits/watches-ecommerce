@@ -16,33 +16,61 @@ export default function Contact() {
     sujet: useId(),
     message: useId(),
     newsletter: useId(),
+    societe: useId(),
   };
 
   const [errors, setErrors] = useState<Errors>({});
   const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [sendError, setSendError] = useState<string | null>(null);
   const [newsletterEmail, setNewsletterEmail] = useState("");
   const [newsletterDone, setNewsletterDone] = useState(false);
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const nom = String(data.get("nom") ?? "").trim();
-    const email = String(data.get("email") ?? "").trim();
-    const message = String(data.get("message") ?? "").trim();
+    const form = event.currentTarget;
+    const data = new FormData(form);
+    const champs = {
+      nom: String(data.get("nom") ?? "").trim(),
+      email: String(data.get("email") ?? "").trim(),
+      sujet: String(data.get("sujet") ?? "collection"),
+      message: String(data.get("message") ?? "").trim(),
+      societe: String(data.get("societe") ?? ""),
+    };
 
     const next: Errors = {};
-    if (nom.length < 2) next.nom = "Indiquez votre nom (2 caractères minimum).";
-    if (!emailPattern.test(email))
+    if (champs.nom.length < 2)
+      next.nom = "Indiquez votre nom (2 caractères minimum).";
+    if (!emailPattern.test(champs.email))
       next.email = "Cette adresse e-mail ne semble pas valide.";
-    if (message.length < 10)
+    if (champs.message.length < 10)
       next.message = "Votre message doit contenir au moins 10 caractères.";
 
     setErrors(next);
     if (Object.keys(next).length > 0) return;
 
-    // Démonstration : aucun envoi réseau, le formulaire confirme localement.
-    setSent(true);
-    event.currentTarget.reset();
+    setSending(true);
+    setSendError(null);
+    setSent(false);
+    try {
+      const reponse = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(champs),
+      });
+      const donnees = await reponse.json();
+
+      if (!reponse.ok) {
+        setSendError(donnees.error ?? "Envoi impossible. Réessayez plus tard.");
+        return;
+      }
+      setSent(true);
+      form.reset();
+    } catch {
+      setSendError("Connexion impossible. Réessayez dans un instant.");
+    } finally {
+      setSending(false);
+    }
   };
 
   const fieldClass = (invalid?: string) =>
@@ -125,6 +153,18 @@ export default function Contact() {
                 </div>
               </div>
 
+              {/* Leurre anti-robot : masqué et hors tabulation. */}
+              <div aria-hidden="true" className="hidden">
+                <label htmlFor={ids.societe}>Société</label>
+                <input
+                  id={ids.societe}
+                  name="societe"
+                  type="text"
+                  tabIndex={-1}
+                  autoComplete="off"
+                />
+              </div>
+
               <div className="mt-6 flex flex-col gap-2">
                 <label
                   htmlFor={ids.sujet}
@@ -171,13 +211,19 @@ export default function Contact() {
               </div>
 
               <div className="mt-8 flex flex-wrap items-center gap-5">
-                <GoldButton type="submit">Envoyer ma demande</GoldButton>
+                <GoldButton type="submit" disabled={sending} aria-busy={sending}>
+                  {sending ? "Envoi…" : "Envoyer ma demande"}
+                </GoldButton>
                 <p aria-live="polite" className="text-sm text-gold-400">
                   {sent
-                    ? "Merci, votre message est bien noté. Nous revenons vers vous sous 24 h."
+                    ? "Message envoyé. Nous revenons vers vous sous 24 h ouvrées."
                     : ""}
                 </p>
               </div>
+
+              <p aria-live="polite" className="mt-3 text-sm text-red-300 empty:hidden">
+                {sendError}
+              </p>
             </form>
           </Reveal>
 
