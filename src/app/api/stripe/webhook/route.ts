@@ -4,7 +4,7 @@ import { getStripe } from "@/lib/stripe";
 
 /** Adresse qui reçoit le détail des commandes. */
 const DESTINATAIRE =
-  process.env.ORDER_NOTIFICATION_EMAIL ?? "noahlorentbonjour2@gmail.com";
+  process.env.ORDER_NOTIFICATION_EMAIL ?? "mydial77@gmail.com";
 
 const euro = (centimes: number) =>
   new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR" }).format(
