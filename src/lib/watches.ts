@@ -142,7 +142,7 @@ export const watches: Watch[] = [
     collection: "Signature",
     description:
       "Cadran chocolat dégradé serti de dix diamants, boîtier et bracelet président en or rose, lunette cannelée.",
-    price: 200,
+    price: 190,
     image: "/collection/datejust-or-rose-chocolat.png",
     finish: "Or rose",
   },
@@ -152,7 +152,7 @@ export const watches: Watch[] = [
     collection: "Signature",
     description:
       "Tout en PVD noir, du boîtier au bracelet jubilé. Cadran noir à chiffres arabes appliqués.",
-    price: 175,
+    price: 200,
     image: "/collection/datejust-triple-noir-arabic.png",
     finish: "Noir",
   },
@@ -162,7 +162,7 @@ export const watches: Watch[] = [
     collection: "Signature",
     description:
       "Cadran violet soleillé, index bâtons acier, lunette cannelée et bracelet jubilé cinq maillons.",
-    price: 165,
+    price: 190,
     image: "/collection/datejust-violet.png",
     finish: "Acier",
   },
@@ -172,7 +172,7 @@ export const watches: Watch[] = [
     collection: "Signature",
     description:
       "Cadran fumé dégradé, chiffres romains, guichets jour et date. Bracelet président acier poli.",
-    price: 170,
+    price: 190,
     image: "/collection/day-date-argent-smoke.png",
     finish: "Acier",
   },
@@ -182,7 +182,7 @@ export const watches: Watch[] = [
     collection: "Signature",
     description:
       "Cadran vert olive soleillé et chiffres romains dorés, boîtier or rose, guichets jour et date.",
-    price: 195,
+    price: 190,
     image: "/collection/day-date-or-rose-olive.png",
     finish: "Or rose",
   },
@@ -192,7 +192,7 @@ export const watches: Watch[] = [
     collection: "Piste",
     description:
       "Chronographe cadran noir, compteurs argentés, lunette tachymètre céramique et bracelet caoutchouc.",
-    price: 175,
+    price: 160,
     image: "/collection/daytona-noir-argent.png",
     finish: "Acier",
   },
@@ -202,7 +202,7 @@ export const watches: Watch[] = [
     collection: "Piste",
     description:
       "Lunette sertie de saphirs multicolores et index pierres assortis, sur cadran noir laqué.",
-    price: 200,
+    price: 160,
     image: "/collection/daytona-rainbow-argent.png",
     finish: "Acier",
   },
@@ -212,7 +212,7 @@ export const watches: Watch[] = [
     collection: "Piste",
     description:
       "Boîtier or rose, lunette arc-en-ciel sertie, cadran blanc laqué et bracelet caoutchouc noir.",
-    price: 200,
+    price: 160,
     image: "/collection/daytona-rainbow-oysterflex.png",
     finish: "Or rose",
   },
@@ -222,7 +222,7 @@ export const watches: Watch[] = [
     collection: "Piste",
     description:
       "Lunette entièrement sertie de rubis sur boîtier acier, cadran noir et compteurs assortis.",
-    price: 198,
+    price: 160,
     image: "/collection/daytona-ruby.png",
     finish: "Acier",
   },
@@ -232,7 +232,7 @@ export const watches: Watch[] = [
     collection: "Piste",
     description:
       "Lunette sertie de saphirs bleus, cadran bleu soleillé et bracelet caoutchouc noir.",
-    price: 198,
+    price: 160,
     image: "/collection/daytona-saphir-bleu.png",
     finish: "Acier",
   },
@@ -242,7 +242,7 @@ export const watches: Watch[] = [
     collection: "Piste",
     description:
       "Chronographe intégralement noirci, lunette tachymètre mate et bracelet caoutchouc.",
-    price: 180,
+    price: 160,
     image: "/collection/daytona-triple-noir.png",
     finish: "Noir",
   },
@@ -272,7 +272,7 @@ export const watches: Watch[] = [
     collection: "Voyageur",
     description:
       "Lunette violet et noir, aiguille 24 h assortie, bracelet jubilé cinq maillons.",
-    price: 172,
+    price: 170,
     image: "/collection/gmt-joker.png",
     finish: "Acier",
   },
@@ -282,7 +282,7 @@ export const watches: Watch[] = [
     collection: "Voyageur",
     description:
       "Lunette bicolore bleu et rouge, le graphisme le plus reconnaissable de l'horlogerie de voyage.",
-    price: 172,
+    price: 170,
     image: "/collection/gmt-pepsi.png",
     finish: "Acier",
   },
@@ -292,7 +292,7 @@ export const watches: Watch[] = [
     collection: "Voyageur",
     description:
       "Lunette vert et noir, aiguille 24 h verte, bracelet jubilé. Couronne à gauche du boîtier.",
-    price: 172,
+    price: 170,
     image: "/collection/gmt-sprite.png",
     finish: "Acier",
   },
@@ -302,7 +302,7 @@ export const watches: Watch[] = [
     collection: "Intégrale",
     description:
       "Cadran blanc à stries horizontales, boîtier coussin et bracelet intégré acier brossé et poli.",
-    price: 185,
+    price: 180,
     image: "/collection/nautilus-blanc-racer.png",
     finish: "Acier",
   },
@@ -312,7 +312,7 @@ export const watches: Watch[] = [
     collection: "Intégrale",
     description:
       "Cadran turquoise tapisserie, boîtier octogonal et bracelet intégré à maillons polis.",
-    price: 185,
+    price: 220,
     image: "/collection/royal-oak-bleu.png",
     finish: "Acier",
   },
@@ -322,7 +322,7 @@ export const watches: Watch[] = [
     collection: "Intégrale",
     description:
       "Cadran vert kaki tapisserie, lunette octogonale vissée et bracelet intégré acier.",
-    price: 185,
+    price: 220,
     image: "/collection/royal-oak-vert.png",
     finish: "Acier",
   },
