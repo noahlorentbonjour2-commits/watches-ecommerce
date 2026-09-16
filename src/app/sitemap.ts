@@ -12,5 +12,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.9,
     },
+    ...["mentions-legales", "cgv", "confidentialite", "cookies"].map((page) => ({
+      url: `${siteUrl}/${page}`,
+      lastModified,
+      changeFrequency: "yearly" as const,
+      priority: 0.3,
+    })),
   ];
 }

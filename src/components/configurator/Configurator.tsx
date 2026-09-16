@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useCallback, useRef, useState } from "react";
 import { GoldButton } from "@/components/ui/GoldButton";
 import BoutonPaiement from "@/components/ui/BoutonPaiement";
@@ -224,6 +225,15 @@ export default function Configurator() {
         <p className="mt-4 text-xs leading-relaxed text-silver-500">
           Paiement sécurisé par Stripe. Un horloger confirme chaque pièce de
           votre configuration sous 24 h ouvrées avant de lancer l&apos;assemblage.
+        </p>
+
+        <p className="mt-3 text-xs leading-relaxed text-silver-500">
+          En commandant, vous acceptez les{" "}
+          <Link href="/cgv" className="text-gold-400 hover:text-gold-500">
+            conditions générales de vente
+          </Link>
+          . Votre montre étant assemblée sur mesure, elle n&apos;ouvre pas droit
+          à rétractation (article L221-28 3° du code de la consommation).
         </p>
       </div>
     </div>

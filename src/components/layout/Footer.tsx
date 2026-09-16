@@ -15,18 +15,18 @@ const columns = [
     title: "Service client",
     links: [
       { label: "Nous contacter", href: "/#contact" },
-      { label: "Livraison & retours", href: "/#contact" },
-      { label: "Garantie 2 ans", href: "/#contact" },
+      { label: "Livraison & retours", href: "/cgv#article-6" },
+      { label: "Garantie 2 ans", href: "/cgv#article-8" },
       { label: "Entretien", href: "/#contact" },
     ],
   },
   {
     title: "Légal",
     links: [
-      { label: "Mentions légales", href: "/#contact" },
-      { label: "CGV", href: "/#contact" },
-      { label: "Politique de confidentialité", href: "/#contact" },
-      { label: "Cookies", href: "/#contact" },
+      { label: "Mentions légales", href: "/mentions-legales" },
+      { label: "CGV", href: "/cgv" },
+      { label: "Politique de confidentialité", href: "/confidentialite" },
+      { label: "Cookies", href: "/cookies" },
     ],
   },
 ];
