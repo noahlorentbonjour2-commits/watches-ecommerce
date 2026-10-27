@@ -129,10 +129,10 @@ export default async function WatchPage({ params }: PageProps) {
 
               <div className="mt-8 rounded-xl border border-gold-500/20 bg-navy-950/60 p-5">
                 <h4 className="text-xs font-bold uppercase tracking-wider text-gold-400">
-                  Garantie & Rétractation
+                  Expédition & Retours
                 </h4>
                 <p className="mt-1.5 text-xs leading-relaxed text-silver-500">
-                  Votre montre bénéficie de la garantie atelier de 2 ans. Consultez nos{" "}
+                  Chaque pièce est soigneusement contrôlée avant envoi avec numéro de suivi. Consultez nos{" "}
                   <Link href="/cgv#article-7" className="text-gold-400 underline underline-offset-4 hover:text-gold-300">
                     conditions générales de vente
                   </Link>.

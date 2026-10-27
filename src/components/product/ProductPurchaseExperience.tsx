@@ -341,13 +341,13 @@ export default function ProductPurchaseExperience({
         </div>
       </div>
 
-      {/* ── 7. Bouton CTA Principal ── */}
+      {/* ── 7. Bouton CTA Principal (Doré My Dial) ── */}
       <div className="mt-6">
         <button
           type="button"
           onClick={handleCheckout}
           disabled={enCours}
-          className="w-full rounded-full bg-[#15803d] py-4 text-center font-bold tracking-wide text-white shadow-lg shadow-emerald-950/40 transition-all duration-200 hover:bg-[#16a34a] hover:scale-[1.01] active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60"
+          className="w-full rounded-full bg-gold-500 py-4 text-center text-sm font-bold uppercase tracking-wider text-ink shadow-lg shadow-gold-500/20 transition-all duration-300 hover:bg-gold-400 hover:scale-[1.01] hover:shadow-[0_0_30px_-5px_var(--color-gold-500)] active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60"
         >
           {enCours ? "Redirection vers le paiement…" : "Ajouter au panier"}
         </button>
@@ -367,7 +367,7 @@ export default function ProductPurchaseExperience({
             Paiement 100% sécurisé
           </span>
           <span>·</span>
-          <span>Garantie 2 ans</span>
+          <span>Atelier en France</span>
           <span>·</span>
           <span>Expédition sous 24/48h</span>
         </div>

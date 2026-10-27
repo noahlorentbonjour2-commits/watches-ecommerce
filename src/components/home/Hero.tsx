@@ -69,7 +69,7 @@ export default function Hero() {
           <dl className="mt-14 grid max-w-md grid-cols-3 gap-6 border-t border-white/10 pt-8">
             {[
               { value: "42", label: "Références" },
-              { value: "2 ans", label: "De garantie" },
+              { value: "24/48h", label: "Expédition" },
               { value: "100 %", label: "Assemblé main" },
             ].map((stat) => (
               <div key={stat.label}>

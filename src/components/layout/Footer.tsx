@@ -16,7 +16,7 @@ const columns = [
     links: [
       { label: "Nous contacter", href: "/#contact" },
       { label: "Livraison & retours", href: "/cgv#article-6" },
-      { label: "Garantie 2 ans", href: "/cgv#article-8" },
+      { label: "Suivi de commande", href: "/#contact" },
       { label: "Entretien", href: "/#contact" },
     ],
   },
@@ -112,7 +112,7 @@ export default function Footer() {
 
         <div className="mt-14 flex flex-col gap-4 border-t border-white/8 pt-8 text-xs text-silver-500 sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} My Dial. Tous droits réservés.</p>
-          <p>Assemblé à la main en France — Garantie 2 ans</p>
+          <p>Assemblé à la main en France</p>
         </div>
       </div>
     </footer>
