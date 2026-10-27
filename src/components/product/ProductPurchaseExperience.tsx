@@ -112,13 +112,8 @@ export default function ProductPurchaseExperience({
         <span>En stock</span>
       </div>
 
-      {/* ── 4. Séparateur avec engagement ── */}
-      <div className="relative my-6 flex items-center justify-center">
-        <div className="w-full border-t border-white/12" />
-        <span className="absolute bg-navy-950 px-3 text-[0.7rem] font-bold uppercase tracking-wider text-silver-300">
-          30 jours Satisfait ou Remboursé
-        </span>
-      </div>
+      {/* ── 4. Séparateur ── */}
+      <div className="my-6 border-t border-white/12" />
 
       {/* ── 5. Sélecteur d'offres (1 Montre vs 2 Montres) ── */}
       <div className="space-y-3">
