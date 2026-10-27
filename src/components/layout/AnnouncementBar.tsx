@@ -1,6 +1,5 @@
 const announcements = [
   "Livraison gratuite",
-  "−10 % en étant abonné",
   "Remise en mains propres",
 ];
 

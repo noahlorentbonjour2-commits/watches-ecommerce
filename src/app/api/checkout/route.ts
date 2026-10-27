@@ -23,6 +23,9 @@ export async function POST(request: Request) {
   try {
     const session = await getStripe().checkout.sessions.create({
       mode: "payment",
+      // Identifie ce flux dans le tableau de bord Stripe sans restreindre les
+      // moyens de paiement proposés automatiquement par Stripe.
+      integration_identifier: "my_dial_checkout_zqvhrmka",
       locale: "fr",
       currency: "eur",
       line_items: [

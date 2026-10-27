@@ -1,5 +1,5 @@
 import type Stripe from "stripe";
-import { sendMail } from "@/lib/mail";
+import { escapeHtml, sendMail } from "@/lib/mail";
 import { getStripe } from "@/lib/stripe";
 
 const euro = (centimes: number) =>
@@ -15,7 +15,7 @@ function corpsHtml(session: Stripe.Checkout.Session) {
     .filter(([cle]) => cle !== "type")
     .map(
       ([cle, valeur]) =>
-        `<tr><td style="padding:6px 16px 6px 0;color:#667">${cle}</td><td style="padding:6px 0"><strong>${valeur}</strong></td></tr>`,
+        `<tr><td style="padding:6px 16px 6px 0;color:#667">${escapeHtml(cle)}</td><td style="padding:6px 0"><strong>${escapeHtml(valeur)}</strong></td></tr>`,
     )
     .join("");
 
@@ -26,7 +26,8 @@ function corpsHtml(session: Stripe.Checkout.Session) {
         `${livraison.postal_code ?? ""} ${livraison.city ?? ""}`.trim(),
         livraison.country,
       ]
-        .filter(Boolean)
+        .filter((ligne): ligne is string => Boolean(ligne))
+        .map(escapeHtml)
         .join("<br>")
     : "—";
 
@@ -40,15 +41,15 @@ function corpsHtml(session: Stripe.Checkout.Session) {
 
       <h3 style="margin:0 0 8px;font-size:14px;text-transform:uppercase;letter-spacing:.08em;color:#667">Client</h3>
       <p style="margin:0 0 20px;line-height:1.6">
-        ${client?.name ?? "—"}<br>
-        ${client?.email ?? "—"}<br>
-        ${client?.phone ?? "—"}
+        ${escapeHtml(client?.name ?? "—")}<br>
+        ${escapeHtml(client?.email ?? "—")}<br>
+        ${escapeHtml(client?.phone ?? "—")}
       </p>
 
       <h3 style="margin:0 0 8px;font-size:14px;text-transform:uppercase;letter-spacing:.08em;color:#667">Livraison</h3>
       <p style="margin:0 0 20px;line-height:1.6">${adresse}</p>
 
-      <p style="margin:0;font-size:12px;color:#889">Session Stripe : ${session.id}</p>
+      <p style="margin:0;font-size:12px;color:#889">Session Stripe : ${escapeHtml(session.id)}</p>
     </div>`;
 }
 
@@ -83,8 +84,16 @@ export async function POST(request: Request) {
     return new Response("Signature invalide", { status: 400 });
   }
 
-  if (event.type === "checkout.session.completed") {
-    const session = event.data.object;
+  if (
+    event.type === "checkout.session.completed" ||
+    event.type === "checkout.session.async_payment_succeeded"
+  ) {
+    const session = event.data.object as Stripe.Checkout.Session;
+    // Avec les moyens de paiement différés, une session peut être terminée
+    // avant que Stripe ait encaissé le paiement. L'événement asynchrone
+    // ci-dessus prendra alors le relais une fois l'encaissement confirmé.
+    if (session.payment_status !== "paid") return Response.json({ received: true });
+
     // On relit la session pour disposer des coordonnées complètes.
     const complete = await getStripe().checkout.sessions.retrieve(session.id);
     await notifier(complete);

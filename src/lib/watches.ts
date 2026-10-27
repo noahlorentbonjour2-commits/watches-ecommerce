@@ -346,6 +346,216 @@ export const watches: Watch[] = [
     image: "/collection/submariner-stealth-joker.png",
     finish: "Noir",
   },
+  {
+    slug: "seiko-mod-aquanaut-vert",
+    name: "seiko mod aquanaut vert",
+    collection: "Voyageur",
+    description:
+      "Boîtier coussin acier, cadran vert texturé et bracelet caoutchouc assorti.",
+    price: 140,
+    image: "/collection/seiko-mod-aquanaut-vert.png",
+    finish: "Acier",
+  },
+  {
+    slug: "seiko-mod-datejust-blanc-who-cares-im-already-late",
+    name: "seiko mod datejust blanc who cares im already late",
+    collection: "Signature",
+    description:
+      "Cadran blanc graphique, lunette cannelée et bracelet jubilé en acier.",
+    price: 190,
+    image: "/collection/seiko-mod-datejust-blanc-who-cares-im-already-late.png",
+    finish: "Acier",
+  },
+  {
+    slug: "seiko-mod-datejust-bleu",
+    name: "seiko mod datejust bleu",
+    collection: "Signature",
+    description:
+      "Cadran bleu soleillé, lunette cannelée et bracelet jubilé cinq maillons.",
+    price: 190,
+    image: "/collection/seiko-mod-datejust-bleu.png",
+    finish: "Acier",
+  },
+  {
+    slug: "seiko-mod-datejust-lady-or-rose-diamant",
+    name: "seiko mod datejust lady or rose diamant",
+    collection: "Signature",
+    description:
+      "Boîtier bicolore acier et or rose, cadran nacré et index sertis.",
+    price: 190,
+    image: "/collection/seiko-mod-datejust-lady-or-rose-diamant.png",
+    finish: "Bicolore",
+  },
+  {
+    slug: "seiko-mod-datejust-noir-galaxy-burst",
+    name: "seiko mod datejust noir galaxy burst",
+    collection: "Signature",
+    description:
+      "Cadran noir constellé, lunette cannelée et bracelet jubilé en acier.",
+    price: 190,
+    image: "/collection/seiko-mod-datejust-noir-galaxy-burst.png",
+    finish: "Acier",
+  },
+  {
+    slug: "seiko-mod-datejust-noir-who-cares-im-already-late",
+    name: "seiko mod datejust noir who cares im already late",
+    collection: "Signature",
+    description:
+      "Cadran noir graphique, lunette cannelée et bracelet jubilé en acier.",
+    price: 190,
+    image: "/collection/seiko-mod-datejust-noir-who-cares-im-already-late.png",
+    finish: "Acier",
+  },
+  {
+    slug: "seiko-mod-datejust-olive",
+    name: "seiko mod datejust olive",
+    collection: "Signature",
+    description:
+      "Cadran vert olive soleillé, lunette cannelée et bracelet jubilé acier.",
+    price: 190,
+    image: "/collection/seiko-mod-datejust-olive.png",
+    finish: "Acier",
+  },
+  {
+    slug: "seiko-mod-datejust-or-argent",
+    name: "seiko mod datejust or argent",
+    collection: "Signature",
+    description:
+      "Boîtier bicolore acier et or jaune, cadran champagne et bracelet jubilé.",
+    price: 190,
+    image: "/collection/seiko-mod-datejust-or-argent.png",
+    finish: "Bicolore",
+  },
+  {
+    slug: "seiko-mod-datejust-or-rose-chocolat-diamant",
+    name: "seiko mod datejust or rose chocolat diamant",
+    collection: "Signature",
+    description:
+      "Cadran chocolat soleillé, index sertis, boîtier et bracelet en or rose.",
+    price: 190,
+    image: "/collection/seiko-mod-datejust-or-rose-chocolat-diamant.png",
+    finish: "Or rose",
+  },
+  {
+    slug: "seiko-mod-datejust-roman-bleu-ciel",
+    name: "seiko mod datejust roman bleu ciel",
+    collection: "Signature",
+    description:
+      "Cadran bleu ciel soleillé, chiffres romains et bracelet jubilé acier.",
+    price: 190,
+    image: "/collection/seiko-mod-datejust-roman-bleu-ciel.png",
+    finish: "Acier",
+  },
+  {
+    slug: "seiko-mod-datejust-vert-sunburst",
+    name: "seiko mod datejust vert sunburst",
+    collection: "Signature",
+    description:
+      "Cadran vert sunburst, lunette cannelée et bracelet jubilé cinq maillons.",
+    price: 190,
+    image: "/collection/seiko-mod-datejust-vert-sunburst.png",
+    finish: "Acier",
+  },
+  {
+    slug: "seiko-mod-day-date-bleu-nuit-galaxy-burst",
+    name: "seiko mod day date bleu nuit galaxy burst",
+    collection: "Signature",
+    description:
+      "Cadran bleu nuit constellé, double guichet et bracelet président acier.",
+    price: 190,
+    image: "/collection/seiko-mod-day-date-bleu-nuit-galaxy-burst.png",
+    finish: "Acier",
+  },
+  {
+    slug: "seiko-mod-day-date-or-rose-smoke-dial",
+    name: "seiko mod day date or rose smoke dial",
+    collection: "Signature",
+    description:
+      "Boîtier et bracelet président or rose, cadran fumé et double guichet.",
+    price: 190,
+    image: "/collection/seiko-mod-day-date-or-rose-smoke-dial.png",
+    finish: "Or rose",
+  },
+  {
+    slug: "seiko-mod-day-date-roman-or-blanc",
+    name: "seiko mod day date roman or blanc",
+    collection: "Signature",
+    description:
+      "Boîtier or jaune, cadran blanc à chiffres romains et double guichet.",
+    price: 190,
+    image: "/collection/seiko-mod-day-date-roman-or-blanc.png",
+    finish: "Or rose",
+  },
+  {
+    slug: "seiko-mod-nautilus-chocolat",
+    name: "seiko mod nautilus chocolat",
+    collection: "Intégrale",
+    description:
+      "Boîtier coussin et bracelet intégré or rose, cadran chocolat strié.",
+    price: 180,
+    image: "/collection/seiko-mod-nautilus-chocolat.png",
+    finish: "Or rose",
+  },
+  {
+    slug: "seiko-mod-nautilus-noir-open-heart",
+    name: "seiko mod nautilus noir open heart",
+    collection: "Intégrale",
+    description:
+      "Cadran noir strié avec ouverture mouvement, boîtier et bracelet acier.",
+    price: 180,
+    image: "/collection/seiko-mod-nautilus-noir-open-heart.png",
+    finish: "Acier",
+  },
+  {
+    slug: "seiko-mod-nautilus-tiffany-bleu-open-heart",
+    name: "seiko mod nautilus tiffany bleu open heart",
+    collection: "Intégrale",
+    description:
+      "Cadran bleu turquoise strié avec ouverture mouvement et bracelet acier.",
+    price: 180,
+    image: "/collection/seiko-mod-nautilus-tiffany-bleu-open-heart.png",
+    finish: "Acier",
+  },
+  {
+    slug: "seiko-mod-royal-oak-triple-noir-chronographe",
+    name: "seiko mod royal oak triple noir chronographe",
+    collection: "Intégrale",
+    description:
+      "Chronographe triple noir, cadran tapisserie et bracelet intégré assorti.",
+    price: 220,
+    image: "/collection/seiko-mod-royal-oak-triple-noir-chronographe.png",
+    finish: "Noir",
+  },
+  {
+    slug: "seiko-mod-santos-9-5-blanc",
+    name: "seiko mod santos 9 5 blanc",
+    collection: "Architecte",
+    description:
+      "Boîtier carré acier, cadran blanc à chiffres romains et détail rouge 9-5.",
+    price: 190,
+    image: "/collection/seiko-mod-santos-9-5-blanc.png",
+    finish: "Acier",
+  },
+  {
+    slug: "seiko-mod-santos-triple-noir",
+    name: "seiko mod santos triple noir",
+    collection: "Architecte",
+    description:
+      "Boîtier carré, cadran à chiffres romains et bracelet en finition noire.",
+    price: 190,
+    image: "/collection/seiko-mod-santos-triple-noir.png",
+    finish: "Noir",
+  },
+  {
+    slug: "seiko-mod-submariner-noir",
+    name: "seiko mod submariner noir",
+    collection: "Voyageur",
+    description:
+      "Plongeuse acier, cadran noir, lunette graduée et bracelet oyster.",
+    price: 180,
+    image: "/collection/seiko-mod-submariner-noir.png",
+    finish: "Acier",
+  },
 ];
 
 export const featuredWatch = watches.find((w) => w.featured) ?? watches[0];

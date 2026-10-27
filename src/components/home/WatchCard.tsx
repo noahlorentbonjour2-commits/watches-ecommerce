@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import BoutonPaiement from "@/components/ui/BoutonPaiement";
 import { formatPrice, type Watch } from "@/lib/watches";
 
@@ -11,7 +12,11 @@ type WatchCardProps = {
 export default function WatchCard({ watch, eager = false }: WatchCardProps) {
   return (
     <article className="group relative flex flex-col border border-white/8 bg-navy-950/60 transition-colors duration-500 hover:border-gold-500/35">
-      <div className="relative aspect-square overflow-hidden bg-[radial-gradient(circle_at_50%_45%,var(--color-navy-800)_0%,var(--color-navy-950)_70%)]">
+      <Link
+        href={`/montres/${watch.slug}`}
+        aria-label={`Découvrir ${watch.name}`}
+        className="relative block aspect-square overflow-hidden bg-[radial-gradient(circle_at_50%_45%,var(--color-navy-800)_0%,var(--color-navy-950)_70%)]"
+      >
         <Image
           src={watch.image}
           alt={`Montre My Dial ${watch.name} — ${watch.collection}`}
@@ -24,11 +29,21 @@ export default function WatchCard({ watch, eager = false }: WatchCardProps) {
         <span className="absolute left-4 top-4 border border-gold-600/40 bg-ink/70 px-3 py-1 text-[0.6rem] uppercase tracking-[0.18em] text-gold-400 backdrop-blur-sm">
           {watch.collection}
         </span>
-      </div>
+        <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/85 to-transparent px-5 pb-5 pt-12 text-[0.65rem] uppercase tracking-[0.2em] text-cream opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-within:opacity-100">
+          Découvrir le modèle
+        </span>
+      </Link>
 
       <div className="flex flex-1 flex-col gap-3 border-t border-white/8 p-6">
         <div className="flex items-baseline justify-between gap-4">
-          <h3 className="font-serif text-2xl text-cream">{watch.name}</h3>
+          <h3 className="font-serif text-2xl text-cream">
+            <Link
+              href={`/montres/${watch.slug}`}
+              className="transition-colors duration-200 hover:text-gold-400"
+            >
+              {watch.name}
+            </Link>
+          </h3>
           <p className="shrink-0 font-serif text-lg text-gold-400">
             {formatPrice(watch.price)}
           </p>
@@ -40,7 +55,13 @@ export default function WatchCard({ watch, eager = false }: WatchCardProps) {
           Finition {watch.finish}
         </p>
 
-        <div className="mt-auto pt-5">
+        <div className="mt-auto flex flex-wrap gap-3 pt-5">
+          <Link
+            href={`/montres/${watch.slug}`}
+            className="inline-flex min-h-11 items-center justify-center border border-white/15 px-5 py-3 text-[0.65rem] uppercase tracking-[0.17em] text-silver-300 transition-colors duration-200 hover:border-gold-500/60 hover:text-gold-400"
+          >
+            Voir le modèle
+          </Link>
           <BoutonPaiement
             payload={() => ({ type: "modele", slug: watch.slug })}
             variant="outline"
