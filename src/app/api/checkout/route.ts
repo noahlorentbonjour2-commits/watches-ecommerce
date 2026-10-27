@@ -21,28 +21,41 @@ export async function POST(request: Request) {
   }
 
   try {
+    const line_items =
+      order.items && order.items.length > 0
+        ? order.items.map((item) => ({
+            quantity: item.quantity,
+            price_data: {
+              currency: "eur",
+              unit_amount: Math.round(item.unitAmount * 100),
+              product_data: {
+                name: item.name,
+                ...(item.description ? { description: item.description } : {}),
+                ...(item.image ? { images: [`${siteUrl}${item.image}`] } : {}),
+              },
+            },
+          }))
+        : [
+            {
+              quantity: 1,
+              price_data: {
+                currency: "eur",
+                unit_amount: Math.round(order.montant * 100),
+                product_data: {
+                  name: order.titre,
+                  description: describeOrder(order),
+                  ...(order.image ? { images: [`${siteUrl}${order.image}`] } : {}),
+                },
+              },
+            },
+          ];
+
     const session = await getStripe().checkout.sessions.create({
       mode: "payment",
-      // Identifie ce flux dans le tableau de bord Stripe sans restreindre les
-      // moyens de paiement proposés automatiquement par Stripe.
       integration_identifier: "my_dial_checkout_zqvhrmka",
       locale: "fr",
       currency: "eur",
-      line_items: [
-        {
-          quantity: 1,
-          price_data: {
-            currency: "eur",
-            // Montant recalculé côté serveur, jamais transmis par le client.
-            unit_amount: order.montant * 100,
-            product_data: {
-              name: order.titre,
-              description: describeOrder(order),
-              ...(order.image ? { images: [`${siteUrl}${order.image}`] } : {}),
-            },
-          },
-        },
-      ],
+      line_items,
       metadata: order.metadata,
       // Récupère de quoi expédier et recontacter le client.
       billing_address_collection: "required",

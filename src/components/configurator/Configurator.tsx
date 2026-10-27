@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useCallback, useRef, useState } from "react";
 import { GoldButton } from "@/components/ui/GoldButton";
-import BoutonPaiement from "@/components/ui/BoutonPaiement";
+import { useCart } from "@/context/CartContext";
 import OptionThumb from "./OptionThumb";
 import WatchPreview from "./WatchPreview";
 import Summary from "./Summary";
@@ -32,6 +32,8 @@ export default function Configurator() {
   const [config, setConfig] = useState<Configuration>(defaultConfiguration);
   const [activeTab, setActiveTab] = useState<PartCategoryId>("case");
   const tabsRef = useRef<(HTMLButtonElement | null)[]>([]);
+  const { addItem } = useCart();
+  const [ajoute, setAjoute] = useState(false);
 
   const select = useCallback((categoryId: PartCategoryId, optionId: string) => {
     // Normalise après chaque choix : passer sur un boîtier sans insert remet
@@ -211,12 +213,30 @@ export default function Configurator() {
         <Summary config={config} total={total} />
 
         <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-start">
-          <BoutonPaiement
-            payload={() => ({ type: "configuration", config })}
+          <GoldButton
+            type="button"
+            onClick={() => {
+              const caseOption = optionFor("case", config.case);
+              const dialOption = optionFor("dial", config.dial);
+              const strapOption = optionFor("bracelet", config.bracelet);
+
+              addItem({
+                type: "configuration",
+                config,
+                title: "My Dial sur mesure",
+                price: total,
+                image: caseOption.image || "/brand/logo.png",
+                quantity: 1,
+                details: `${caseOption.label} · ${dialOption.label} · ${strapOption.label}`,
+              });
+
+              setAjoute(true);
+              setTimeout(() => setAjoute(false), 2500);
+            }}
             className="sm:flex-1"
           >
-            Commander — {euro(total)}
-          </BoutonPaiement>
+            {ajoute ? "✓ Montre ajoutée au panier !" : `Ajouter au panier — ${euro(total)}`}
+          </GoldButton>
           <GoldButton type="button" variant="outline" onClick={reset}>
             Réinitialiser
           </GoldButton>

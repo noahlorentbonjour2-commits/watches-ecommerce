@@ -17,6 +17,14 @@ import { watches } from "./watches";
  * est recalculé ici à partir du catalogue. Sans cela, n'importe qui pourrait
  * poster un prix arbitraire à la caisse.
  */
+export type OrderLineItem = {
+  name: string;
+  description?: string;
+  unitAmount: number;
+  quantity: number;
+  image?: string;
+};
+
 export type Order = {
   /** Intitulé de la ligne de paiement. */
   titre: string;
@@ -27,12 +35,14 @@ export type Order = {
   /** Copie plate pour les métadonnées Stripe. */
   metadata: Record<string, string>;
   image?: string;
+  items?: OrderLineItem[];
 };
 
 export type CheckoutRequest =
   | { type: "configuration"; config: Partial<Configuration> }
   | { type: "modele"; slug: string }
-  | { type: "bundle"; slugs: string[] };
+  | { type: "bundle"; slugs: string[] }
+  | { type: "cart"; items: any[] };
 
 /** Valide une configuration reçue du client, option par option. */
 function parseConfiguration(recu: Partial<Configuration>): Configuration {
@@ -135,11 +145,113 @@ function fromBundle(slugs: string[]): Order {
   };
 }
 
+function fromCart(cartItems: any[]): Order {
+  if (!Array.isArray(cartItems) || cartItems.length === 0) {
+    throw new Error("Votre panier est vide");
+  }
+
+  const items: OrderLineItem[] = [];
+  const lignes: { libelle: string; valeur: string }[] = [];
+  let totalMontant = 0;
+  let totalWatchesCount = 0;
+
+  for (const it of cartItems) {
+    const qty = Math.max(1, Number(it.quantity) || 1);
+
+    if (it.type === "modele") {
+      const watch = watches.find((w) => w.slug === it.slug);
+      if (!watch) continue;
+      items.push({
+        name: `My Dial ${watch.name}`,
+        description: `Collection ${watch.collection} · Finition ${watch.finish}`,
+        unitAmount: watch.price,
+        quantity: qty,
+        image: watch.image,
+      });
+      lignes.push({
+        libelle: `${qty}x ${watch.name}`,
+        valeur: `${watch.price * qty} €`,
+      });
+      totalMontant += watch.price * qty;
+      totalWatchesCount += qty;
+    } else if (it.type === "bundle") {
+      const slugs: string[] = it.slugs || [];
+      const pair = slugs
+        .map((s) => watches.find((w) => w.slug === s))
+        .filter((w): w is NonNullable<typeof w> => Boolean(w));
+
+      if (pair.length === 2) {
+        const base = pair[0].price + pair[1].price;
+        const discount = Math.round(base * 0.15);
+        const duoPrice = base - discount;
+        items.push({
+          name: `Pack Duo (${pair[0].name} + ${pair[1].name})`,
+          description: "Offre Duo avec remise 15% et étui 3 montres offert",
+          unitAmount: duoPrice,
+          quantity: qty,
+          image: pair[0].image,
+        });
+        lignes.push({
+          libelle: `Pack Duo (${pair[0].name} + ${pair[1].name})`,
+          valeur: `${duoPrice * qty} €`,
+        });
+        totalMontant += duoPrice * qty;
+        totalWatchesCount += 2 * qty;
+      }
+    } else if (it.type === "configuration") {
+      try {
+        const config = parseConfiguration(it.config);
+        const price = totalPrice(config);
+        const caseOpt = optionFor("case", config.case);
+        items.push({
+          name: "My Dial sur mesure (Configurateur)",
+          description: `${caseOpt.label} · ${optionFor("dial", config.dial).label}`,
+          unitAmount: price,
+          quantity: qty,
+          image: caseOpt.image || undefined,
+        });
+        lignes.push({
+          libelle: `${qty}x Montre sur mesure`,
+          valeur: `${price * qty} €`,
+        });
+        totalMontant += price * qty;
+        totalWatchesCount += qty;
+      } catch {
+        // Ignorer config corrompue
+      }
+    }
+  }
+
+  if (items.length === 0) {
+    throw new Error("Aucun article valide dans le panier");
+  }
+
+  // Ajout des cadeaux
+  lignes.push({ libelle: "Accessoire offert", valeur: "Chasse-goupille de réglage bracelet" });
+  lignes.push({ libelle: "Livraison", valeur: "Livraison suivie à domicile (Offerte)" });
+  if (totalWatchesCount >= 2) {
+    lignes.push({ libelle: "Cadeau débloqué", valeur: "Étui 3 montres en cuir luxe (Offert)" });
+  }
+
+  return {
+    titre: `Commande My Dial (${items.length} article${items.length > 1 ? "s" : ""})`,
+    lignes,
+    montant: totalMontant,
+    metadata: {
+      type: "cart",
+      items_count: String(items.length),
+      watches_count: String(totalWatchesCount),
+    },
+    items,
+  };
+}
+
 export function buildOrder(payload: CheckoutRequest): Order {
   if (payload.type === "modele") return fromModele(payload.slug);
   if (payload.type === "bundle") return fromBundle(payload.slugs);
   if (payload.type === "configuration")
     return fromConfiguration(payload.config ?? {});
+  if (payload.type === "cart") return fromCart(payload.items ?? []);
   throw new Error("Type de commande inconnu");
 }
 

@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Cormorant_Garamond, Montserrat } from "next/font/google";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import { CartProvider } from "@/context/CartContext";
+import CartDrawer from "@/components/cart/CartDrawer";
 import { siteUrl } from "@/lib/site";
 import "./globals.css";
 
@@ -56,17 +58,20 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${cormorant.variable} ${montserrat.variable} h-full`}
     >
       <body className="min-h-full flex flex-col bg-ink text-cream">
-        <a
-          href="#contenu"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-100 focus:rounded-none focus:bg-gold-500 focus:px-5 focus:py-3 focus:text-sm focus:font-medium focus:text-ink"
-        >
-          Aller au contenu principal
-        </a>
-        <Header />
-        <main id="contenu" className="flex-1">
-          {children}
-        </main>
-        <Footer />
+        <CartProvider>
+          <a
+            href="#contenu"
+            className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-100 focus:rounded-none focus:bg-gold-500 focus:px-5 focus:py-3 focus:text-sm focus:font-medium focus:text-ink"
+          >
+            Aller au contenu principal
+          </a>
+          <Header />
+          <CartDrawer />
+          <main id="contenu" className="flex-1">
+            {children}
+          </main>
+          <Footer />
+        </CartProvider>
       </body>
     </html>
   );

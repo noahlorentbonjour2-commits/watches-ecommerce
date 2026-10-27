@@ -1,7 +1,9 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
-import BoutonPaiement from "@/components/ui/BoutonPaiement";
 import { formatPrice, type Watch } from "@/lib/watches";
+import { useCart } from "@/context/CartContext";
 
 type WatchCardProps = {
   watch: Watch;
@@ -10,6 +12,19 @@ type WatchCardProps = {
 };
 
 export default function WatchCard({ watch, eager = false }: WatchCardProps) {
+  const { addItem } = useCart();
+
+  const handleAddToCart = () => {
+    addItem({
+      type: "modele",
+      slug: watch.slug,
+      title: watch.name,
+      price: watch.price,
+      image: watch.image,
+      quantity: 1,
+      details: `Collection ${watch.collection} · Finition ${watch.finish}`,
+    });
+  };
   return (
     <article className="group relative flex flex-col border border-white/8 bg-navy-950/60 transition-colors duration-500 hover:border-gold-500/35">
       <Link
@@ -55,19 +70,20 @@ export default function WatchCard({ watch, eager = false }: WatchCardProps) {
           Finition {watch.finish}
         </p>
 
-        <div className="mt-auto flex flex-wrap gap-3 pt-5">
+        <div className="mt-auto flex flex-wrap gap-2.5 pt-5">
           <Link
             href={`/montres/${watch.slug}`}
-            className="inline-flex min-h-11 items-center justify-center border border-white/15 px-5 py-3 text-[0.65rem] uppercase tracking-[0.17em] text-silver-300 transition-colors duration-200 hover:border-gold-500/60 hover:text-gold-400"
+            className="flex-1 inline-flex min-h-11 items-center justify-center border border-white/15 px-3 py-3 text-[0.65rem] uppercase tracking-[0.17em] text-silver-300 transition-colors duration-200 hover:border-gold-500/60 hover:text-gold-400"
           >
-            Voir le modèle
+            Découvrir
           </Link>
-          <BoutonPaiement
-            payload={() => ({ type: "modele", slug: watch.slug })}
-            variant="outline"
+          <button
+            type="button"
+            onClick={handleAddToCart}
+            className="flex-1 inline-flex min-h-11 cursor-pointer items-center justify-center border border-gold-600/60 bg-gold-500/10 px-3 py-3 text-[0.65rem] font-medium uppercase tracking-[0.17em] text-gold-400 transition-all duration-200 hover:border-gold-400 hover:bg-gold-500 hover:text-ink"
           >
-            Commander
-          </BoutonPaiement>
+            + Panier
+          </button>
         </div>
       </div>
     </article>

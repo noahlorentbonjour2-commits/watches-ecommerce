@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState, useSyncExternalStore } from "react";
 import AnnouncementBar from "./AnnouncementBar";
+import { useCart } from "@/context/CartContext";
 
 /** Abonnement au défilement, sans setState dans un effet. */
 const subscribeToScroll = (onChange: () => void) => {
@@ -24,6 +25,7 @@ export default function Header() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
   const [lastPathname, setLastPathname] = useState(pathname);
+  const { openCart, totalCount } = useCart();
 
   const scrolled = useSyncExternalStore(
     subscribeToScroll,
@@ -99,21 +101,47 @@ export default function Header() {
           </ul>
         </nav>
 
-        <Link
-          href="/montre-personnalisee"
-          className="hidden shrink-0 cursor-pointer border border-gold-600/60 px-6 py-3 text-[0.68rem] uppercase tracking-luxe text-gold-400 transition-all duration-300 hover:border-gold-400 hover:bg-gold-500/10 lg:inline-flex"
-        >
-          Créer ma montre
-        </Link>
+        <div className="flex items-center gap-3">
+          <Link
+            href="/montre-personnalisee"
+            className="hidden shrink-0 cursor-pointer border border-gold-600/60 px-6 py-3 text-[0.68rem] uppercase tracking-luxe text-gold-400 transition-all duration-300 hover:border-gold-400 hover:bg-gold-500/10 lg:inline-flex"
+          >
+            Créer ma montre
+          </Link>
 
-        <button
-          type="button"
-          onClick={() => setOpen((v) => !v)}
-          aria-expanded={open}
-          aria-controls="menu-mobile"
-          aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
-          className="flex size-11 cursor-pointer items-center justify-center text-cream lg:hidden"
-        >
+          {/* Bouton Panier */}
+          <button
+            type="button"
+            onClick={openCart}
+            aria-label="Ouvrir le panier"
+            className="relative flex size-11 items-center justify-center rounded-full text-cream transition-colors hover:text-gold-400"
+          >
+            <svg
+              className="size-5"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
+              <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
+              <path d="M3 6h18" />
+              <path d="M16 10a4 4 0 0 1-8 0" />
+            </svg>
+            {totalCount > 0 && (
+              <span className="absolute right-1 top-1 flex size-5 items-center justify-center rounded-full bg-gold-500 text-[10px] font-bold text-ink shadow-sm animate-scale">
+                {totalCount}
+              </span>
+            )}
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            aria-expanded={open}
+            aria-controls="menu-mobile"
+            aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
+            className="flex size-11 cursor-pointer items-center justify-center text-cream lg:hidden"
+          >
           <span className="relative block h-4 w-6">
             <span
               className={`absolute left-0 block h-px w-6 bg-current transition-all duration-300 ${
@@ -132,6 +160,7 @@ export default function Header() {
             />
           </span>
         </button>
+        </div>
       </div>
 
       {/* Menu mobile */}

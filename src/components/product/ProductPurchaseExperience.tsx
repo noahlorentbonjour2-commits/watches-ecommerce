@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { formatPrice, type Watch } from "@/lib/watches";
+import { useCart } from "@/context/CartContext";
 
 type ProductPurchaseExperienceProps = {
   watch: Watch;
@@ -23,9 +24,8 @@ export default function ProductPurchaseExperience({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
 
-  // État de paiement
-  const [enCours, setEnCours] = useState(false);
-  const [erreur, setErreur] = useState<string | null>(null);
+  const { addItem } = useCart();
+  const [ajoute, setAjoute] = useState(false);
 
   // Calculs de prix
   // Prix 1 montre
@@ -41,36 +41,32 @@ export default function ProductPurchaseExperience({
   const economy2 = (originalPrice2 - totalDuoPrice).toFixed(2).replace(".", ",");
   const unitDuoPrice = (totalDuoPrice / 2).toFixed(2).replace(".", ",");
 
-  // Lancement du paiement Stripe
-  const handleCheckout = async () => {
-    setEnCours(true);
-    setErreur(null);
-
-    const payload =
-      pack === "1"
-        ? { type: "modele", slug: watch.slug }
-        : { type: "bundle", slugs: [watch.slug, secondWatch.slug] };
-
-    try {
-      const response = await fetch("/api/checkout", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+  // Ajout au panier
+  const handleAddToCart = () => {
+    if (pack === "1") {
+      addItem({
+        type: "modele",
+        slug: watch.slug,
+        title: watch.name,
+        price: watch.price,
+        image: watch.image,
+        quantity: 1,
+        details: `Collection ${watch.collection} · Finition ${watch.finish}`,
       });
-
-      const data = await response.json();
-
-      if (!response.ok || !data.url) {
-        setErreur(data.error ?? "Le paiement n'a pas pu démarrer.");
-        setEnCours(false);
-        return;
-      }
-
-      window.location.assign(data.url);
-    } catch {
-      setErreur("Connexion impossible. Réessayez dans un instant.");
-      setEnCours(false);
+    } else {
+      addItem({
+        type: "bundle",
+        slugs: [watch.slug, secondWatch.slug],
+        title: `Pack Duo (${watch.name} + ${secondWatch.name})`,
+        price: totalDuoPrice,
+        image: watch.image,
+        quantity: 1,
+        details: `2 Montres incluses · Remise 15% · Étui 3 montres offert`,
+      });
     }
+
+    setAjoute(true);
+    setTimeout(() => setAjoute(false), 2000);
   };
 
   const filteredModalWatches = candidateWatches.filter((w) =>
@@ -345,16 +341,11 @@ export default function ProductPurchaseExperience({
       <div className="mt-6">
         <button
           type="button"
-          onClick={handleCheckout}
-          disabled={enCours}
-          className="w-full rounded-full bg-gold-500 py-4 text-center text-sm font-bold uppercase tracking-wider text-ink shadow-lg shadow-gold-500/20 transition-all duration-300 hover:bg-gold-400 hover:scale-[1.01] hover:shadow-[0_0_30px_-5px_var(--color-gold-500)] active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60"
+          onClick={handleAddToCart}
+          className="w-full rounded-full bg-gold-500 py-4 text-center text-sm font-bold uppercase tracking-wider text-ink shadow-lg shadow-gold-500/20 transition-all duration-300 hover:bg-gold-400 hover:scale-[1.01] hover:shadow-[0_0_30px_-5px_var(--color-gold-500)] active:scale-[0.99]"
         >
-          {enCours ? "Redirection vers le paiement…" : "Ajouter au panier"}
+          {ajoute ? "✓ Ajouté au panier !" : "Ajouter au panier"}
         </button>
-
-        {erreur && (
-          <p className="mt-2 text-center text-xs text-red-400 font-medium">{erreur}</p>
-        )}
       </div>
 
       {/* ── 8. Réassurance et Moyens de Paiement ── */}
