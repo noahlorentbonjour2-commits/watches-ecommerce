@@ -32,7 +32,7 @@ export const watches: Watch[] = [
     collection: "Intégrale",
     description:
       "Boîtier octogonal et bracelet intégré en or rose, cadran tapisserie noir profond.",
-    price: 200,
+    price: 220,
     image: "/collection/royal-or-rose.png",
     finish: "Or rose",
   },
@@ -42,7 +42,7 @@ export const watches: Watch[] = [
     collection: "Intégrale",
     description:
       "Cadran embossé bleu dégradé, boîtier coussin acier brossé et poli main.",
-    price: 180,
+    price: 190,
     image: "/collection/nautilus-bleu-nuit.png",
     finish: "Acier",
   },
@@ -112,7 +112,7 @@ export const watches: Watch[] = [
     collection: "Voyageur",
     description:
       "Boîtier coussin or rose et bracelet caoutchouc bordeaux, cadran brun texturé tropical.",
-    price: 170,
+    price: 180,
     image: "/collection/aquanaut-or-rose.png",
     finish: "Or rose",
   },
@@ -122,7 +122,7 @@ export const watches: Watch[] = [
     collection: "Architecte",
     description:
       "Boîtier carré acier, cadran opalin, chiffres romains et aiguilles bleuies à la flamme.",
-    price: 180,
+    price: 190,
     image: "/collection/carre-blanc.png",
     finish: "Acier",
   },
@@ -302,7 +302,7 @@ export const watches: Watch[] = [
     collection: "Intégrale",
     description:
       "Cadran blanc à stries horizontales, boîtier coussin et bracelet intégré acier brossé et poli.",
-    price: 180,
+    price: 190,
     image: "/collection/nautilus-blanc-racer.png",
     finish: "Acier",
   },
@@ -312,7 +312,7 @@ export const watches: Watch[] = [
     collection: "Intégrale",
     description:
       "Cadran turquoise tapisserie, boîtier octogonal et bracelet intégré à maillons polis.",
-    price: 200,
+    price: 220,
     image: "/collection/royal-oak-bleu.png",
     finish: "Acier",
   },
@@ -322,7 +322,7 @@ export const watches: Watch[] = [
     collection: "Intégrale",
     description:
       "Cadran vert kaki tapisserie, lunette octogonale vissée et bracelet intégré acier.",
-    price: 200,
+    price: 220,
     image: "/collection/royal-oak-vert.png",
     finish: "Acier",
   },
@@ -352,7 +352,7 @@ export const watches: Watch[] = [
     collection: "Voyageur",
     description:
       "Boîtier coussin acier, cadran vert texturé et bracelet caoutchouc assorti.",
-    price: 170,
+    price: 180,
     image: "/collection/seiko-mod-aquanaut-vert.png",
     finish: "Acier",
   },
@@ -362,7 +362,7 @@ export const watches: Watch[] = [
     collection: "Signature",
     description:
       "Cadran blanc graphique, lunette cannelée et bracelet jubilé en acier.",
-    price: 180,
+    price: 190,
     image: "/collection/seiko-mod-datejust-blanc-who-cares-im-already-late.png",
     finish: "Acier",
   },
@@ -402,7 +402,7 @@ export const watches: Watch[] = [
     collection: "Signature",
     description:
       "Cadran noir graphique, lunette cannelée et bracelet jubilé en acier.",
-    price: 180,
+    price: 190,
     image: "/collection/seiko-mod-datejust-noir-who-cares-im-already-late.png",
     finish: "Acier",
   },
@@ -492,7 +492,7 @@ export const watches: Watch[] = [
     collection: "Intégrale",
     description:
       "Boîtier coussin et bracelet intégré or rose, cadran chocolat strié.",
-    price: 180,
+    price: 190,
     image: "/collection/seiko-mod-nautilus-chocolat.png",
     finish: "Or rose",
   },
@@ -502,7 +502,7 @@ export const watches: Watch[] = [
     collection: "Intégrale",
     description:
       "Cadran noir strié avec ouverture mouvement, boîtier et bracelet acier.",
-    price: 180,
+    price: 190,
     image: "/collection/seiko-mod-nautilus-noir-open-heart.png",
     finish: "Acier",
   },
@@ -512,7 +512,7 @@ export const watches: Watch[] = [
     collection: "Intégrale",
     description:
       "Cadran bleu turquoise strié avec ouverture mouvement et bracelet acier.",
-    price: 180,
+    price: 190,
     image: "/collection/seiko-mod-nautilus-tiffany-bleu-open-heart.png",
     finish: "Acier",
   },
@@ -522,7 +522,7 @@ export const watches: Watch[] = [
     collection: "Intégrale",
     description:
       "Chronographe triple noir, cadran tapisserie et bracelet intégré assorti.",
-    price: 200,
+    price: 220,
     image: "/collection/seiko-mod-royal-oak-triple-noir-chronographe.png",
     finish: "Noir",
   },
@@ -532,7 +532,7 @@ export const watches: Watch[] = [
     collection: "Architecte",
     description:
       "Boîtier carré acier, cadran blanc à chiffres romains et détail rouge 9-5.",
-    price: 180,
+    price: 190,
     image: "/collection/seiko-mod-santos-9-5-blanc.png",
     finish: "Acier",
   },
@@ -542,7 +542,7 @@ export const watches: Watch[] = [
     collection: "Architecte",
     description:
       "Boîtier carré, cadran à chiffres romains et bracelet en finition noire.",
-    price: 180,
+    price: 190,
     image: "/collection/seiko-mod-santos-triple-noir.png",
     finish: "Noir",
   },
