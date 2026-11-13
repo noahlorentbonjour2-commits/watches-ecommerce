@@ -51,7 +51,7 @@ export default function WatchCard({ watch, eager = false }: WatchCardProps) {
 
       <div className="flex flex-1 flex-col gap-3 border-t border-white/8 p-6">
         <div className="flex items-baseline justify-between gap-4">
-          <h3 className="font-serif text-2xl text-cream">
+          <h3 className="font-serif text-2xl leading-snug text-cream">
             <Link
               href={`/montres/${watch.slug}`}
               className="transition-colors duration-200 hover:text-gold-400"

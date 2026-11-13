@@ -17,7 +17,7 @@ export type Watch = {
 export const watches: Watch[] = [
   {
     slug: "bleu-imperial",
-    name: "Bleu Impérial",
+    name: "Datejust Arabic Bleu",
     collection: "Signature",
     description:
       "Cadran bleu nuit guilloché, index arabes appliqués et lunette cannelée. La pièce qui a donné son nom à la maison.",
@@ -28,57 +28,57 @@ export const watches: Watch[] = [
   },
   {
     slug: "royal-or-rose",
-    name: "Royal Or Rose",
+    name: "Royal Oak Or Rose",
     collection: "Intégrale",
     description:
       "Boîtier octogonal et bracelet intégré en or rose, cadran tapisserie noir profond.",
-    price: 180,
+    price: 200,
     image: "/collection/royal-or-rose.png",
     finish: "Or rose",
   },
   {
     slug: "nautilus-bleu-nuit",
-    name: "Horizon Bleu Nuit",
+    name: "Nautilus Bleu",
     collection: "Intégrale",
     description:
       "Cadran embossé bleu dégradé, boîtier coussin acier brossé et poli main.",
-    price: 160,
+    price: 180,
     image: "/collection/nautilus-bleu-nuit.png",
     finish: "Acier",
   },
   {
     slug: "gmt-rootbeer",
-    name: "GMT Rootbeer",
+    name: "GMT Root Beer",
     collection: "Voyageur",
     description:
       "Lunette bicolore brun et or rose, aiguille 24 h pour lire un second fuseau d'un regard.",
-    price: 140,
+    price: 180,
     image: "/collection/gmt-rootbeer.png",
     finish: "Bicolore",
   },
   {
     slug: "chrono-panda",
-    name: "Chrono Panda",
+    name: "Daytona Panda",
     collection: "Piste",
     description:
       "Cadran laqué blanc, compteurs noirs et lunette céramique. Un classique de la course automobile.",
-    price: 150,
+    price: 160,
     image: "/collection/chrono-panda.png",
     finish: "Acier",
   },
   {
     slug: "chrono-or-rose",
-    name: "Chrono Or Rose",
+    name: "Daytona Or Rose Chocolat",
     collection: "Piste",
     description:
       "Chronographe habillé d'or rose, cadran chocolat et bracelet caoutchouc texturé.",
-    price: 150,
+    price: 160,
     image: "/collection/chrono-or-rose.png",
     finish: "Or rose",
   },
   {
     slug: "glacier-arabic",
-    name: "Glacier Arabic",
+    name: "Datejust Arabic Glacier",
     collection: "Signature",
     description:
       "Cadran bleu glacier nacré, chiffres arabes appliqués et bracelet jubilé cinq maillons.",
@@ -88,7 +88,7 @@ export const watches: Watch[] = [
   },
   {
     slug: "onyx-arabic",
-    name: "Onyx Arabic",
+    name: "Datejust Arabic Noir",
     collection: "Signature",
     description:
       "Cadran noir onyx mat, lunette cannelée et bracelet oyster 36 mm. La sobriété absolue.",
@@ -98,7 +98,7 @@ export const watches: Watch[] = [
   },
   {
     slug: "rose-poudre",
-    name: "Rose Poudré",
+    name: "Datejust Arabic Rose",
     collection: "Signature",
     description:
       "Cadran rose poudré soleillé, index arabes fins. Un boîtier 36 mm pensé pour tous les poignets.",
@@ -112,83 +112,83 @@ export const watches: Watch[] = [
     collection: "Voyageur",
     description:
       "Boîtier coussin or rose et bracelet caoutchouc bordeaux, cadran brun texturé tropical.",
-    price: 140,
+    price: 170,
     image: "/collection/aquanaut-or-rose.png",
     finish: "Or rose",
   },
   {
     slug: "carre-blanc",
-    name: "Carré Blanc",
+    name: "Santos Blanc",
     collection: "Architecte",
     description:
       "Boîtier carré acier, cadran opalin, chiffres romains et aiguilles bleuies à la flamme.",
-    price: 190,
+    price: 180,
     image: "/collection/carre-blanc.png",
     finish: "Acier",
   },
   {
     slug: "squelette",
-    name: "Squelette",
+    name: "Royal Oak Squelette",
     collection: "Architecte",
     description:
       "Cadran ajouré laissant apparaître le mouvement automatique et sa masse oscillante.",
-    price: 200,
+    price: 220,
     image: "/collection/squelette.png",
     finish: "Acier",
   },
   {
     slug: "datejust-or-rose-chocolat",
-    name: 'SEIKO MOD Datejust | Or Rose & Chocolat Diamant',
+    name: "Datejust Or Rose Chocolat Diamant",
     collection: "Signature",
     description:
       "Cadran chocolat dégradé serti de dix diamants, boîtier et bracelet président en or rose, lunette cannelée.",
-    price: 190,
+    price: 180,
     image: "/collection/datejust-or-rose-chocolat.png",
     finish: "Or rose",
   },
   {
     slug: "datejust-triple-noir-arabic",
-    name: 'SEIKO MOD Datejust | Triple Noir & Arabic Dial',
+    name: "Datejust Arabic Triple Noir",
     collection: "Signature",
     description:
       "Tout en PVD noir, du boîtier au bracelet jubilé. Cadran noir à chiffres arabes appliqués.",
-    price: 200,
+    price: 190,
     image: "/collection/datejust-triple-noir-arabic.png",
     finish: "Noir",
   },
   {
     slug: "datejust-violet",
-    name: 'SEIKO MOD Datejust | Violet',
+    name: "Datejust Violet",
     collection: "Signature",
     description:
       "Cadran violet soleillé, index bâtons acier, lunette cannelée et bracelet jubilé cinq maillons.",
-    price: 190,
+    price: 180,
     image: "/collection/datejust-violet.png",
     finish: "Acier",
   },
   {
     slug: "day-date-argent-smoke",
-    name: 'SEIKO MOD Day-Date | Argent & Smoke Dial',
+    name: "Day-Date Smoke",
     collection: "Signature",
     description:
       "Cadran fumé dégradé, chiffres romains, guichets jour et date. Bracelet président acier poli.",
-    price: 190,
+    price: 180,
     image: "/collection/day-date-argent-smoke.png",
     finish: "Acier",
   },
   {
     slug: "day-date-or-rose-olive",
-    name: 'SEIKO MOD Day-Date | Or Rose Olive',
+    name: "Day-Date Or Rose Olive",
     collection: "Signature",
     description:
       "Cadran vert olive soleillé et chiffres romains dorés, boîtier or rose, guichets jour et date.",
-    price: 190,
+    price: 180,
     image: "/collection/day-date-or-rose-olive.png",
     finish: "Or rose",
   },
   {
     slug: "daytona-noir-argent",
-    name: 'SEIKO MOD Daytona | Noir & Argent Oysterflex',
+    name: "Daytona Noir Oysterflex",
     collection: "Piste",
     description:
       "Chronographe cadran noir, compteurs argentés, lunette tachymètre céramique et bracelet caoutchouc.",
@@ -198,7 +198,7 @@ export const watches: Watch[] = [
   },
   {
     slug: "daytona-rainbow-argent",
-    name: 'SEIKO MOD Daytona | Rainbow Argent',
+    name: "Daytona Rainbow",
     collection: "Piste",
     description:
       "Lunette sertie de saphirs multicolores et index pierres assortis, sur cadran noir laqué.",
@@ -208,7 +208,7 @@ export const watches: Watch[] = [
   },
   {
     slug: "daytona-rainbow-oysterflex",
-    name: 'SEIKO MOD Daytona | Rainbow Oysterflex',
+    name: "Daytona Rainbow Or Rose",
     collection: "Piste",
     description:
       "Boîtier or rose, lunette arc-en-ciel sertie, cadran blanc laqué et bracelet caoutchouc noir.",
@@ -218,7 +218,7 @@ export const watches: Watch[] = [
   },
   {
     slug: "daytona-ruby",
-    name: 'SEIKO MOD Daytona | Ruby',
+    name: "Daytona Rubis",
     collection: "Piste",
     description:
       "Lunette entièrement sertie de rubis sur boîtier acier, cadran noir et compteurs assortis.",
@@ -228,7 +228,7 @@ export const watches: Watch[] = [
   },
   {
     slug: "daytona-saphir-bleu",
-    name: 'SEIKO MOD Daytona | Saphir Bleu Oysterflex',
+    name: "Daytona Saphirs Bleus",
     collection: "Piste",
     description:
       "Lunette sertie de saphirs bleus, cadran bleu soleillé et bracelet caoutchouc noir.",
@@ -238,7 +238,7 @@ export const watches: Watch[] = [
   },
   {
     slug: "daytona-triple-noir",
-    name: 'SEIKO MOD Daytona | Triple Noir Oysterflex',
+    name: "Daytona Triple Noir",
     collection: "Piste",
     description:
       "Chronographe intégralement noirci, lunette tachymètre mate et bracelet caoutchouc.",
@@ -248,57 +248,57 @@ export const watches: Watch[] = [
   },
   {
     slug: "gmt-batman",
-    name: 'SEIKO MOD GMT | Batman',
+    name: "GMT Batman",
     collection: "Voyageur",
     description:
       "Lunette céramique bleu et noir, aiguille 24 h, bracelet oyster. Le second fuseau d'un regard.",
-    price: 170,
+    price: 180,
     image: "/collection/gmt-batman.png",
     finish: "Acier",
   },
   {
     slug: "gmt-bruce-wayne",
-    name: 'SEIKO MOD GMT | Bruce Wayne',
+    name: "GMT Bruce Wayne",
     collection: "Voyageur",
     description:
       "Lunette céramique noire intégrale et bracelet jubilé. La version la plus sobre du GMT.",
-    price: 170,
+    price: 180,
     image: "/collection/gmt-bruce-wayne.png",
     finish: "Acier",
   },
   {
     slug: "gmt-joker",
-    name: 'SEIKO MOD GMT | Joker',
+    name: "GMT Joker",
     collection: "Voyageur",
     description:
       "Lunette violet et noir, aiguille 24 h assortie, bracelet jubilé cinq maillons.",
-    price: 170,
+    price: 180,
     image: "/collection/gmt-joker.png",
     finish: "Acier",
   },
   {
     slug: "gmt-pepsi",
-    name: 'SEIKO MOD GMT | Pepsi',
+    name: "GMT Pepsi",
     collection: "Voyageur",
     description:
       "Lunette bicolore bleu et rouge, le graphisme le plus reconnaissable de l'horlogerie de voyage.",
-    price: 170,
+    price: 180,
     image: "/collection/gmt-pepsi.png",
     finish: "Acier",
   },
   {
     slug: "gmt-sprite",
-    name: 'SEIKO MOD GMT | Sprite',
+    name: "GMT Sprite",
     collection: "Voyageur",
     description:
       "Lunette vert et noir, aiguille 24 h verte, bracelet jubilé. Couronne à gauche du boîtier.",
-    price: 170,
+    price: 180,
     image: "/collection/gmt-sprite.png",
     finish: "Acier",
   },
   {
     slug: "nautilus-blanc-racer",
-    name: 'SEIKO MOD Nautilus | Blanc "Racer"',
+    name: "Nautilus Blanc",
     collection: "Intégrale",
     description:
       "Cadran blanc à stries horizontales, boîtier coussin et bracelet intégré acier brossé et poli.",
@@ -308,27 +308,27 @@ export const watches: Watch[] = [
   },
   {
     slug: "royal-oak-bleu",
-    name: 'SEIKO MOD Royal Oak | Bleu',
+    name: "Royal Oak Tiffany",
     collection: "Intégrale",
     description:
       "Cadran turquoise tapisserie, boîtier octogonal et bracelet intégré à maillons polis.",
-    price: 220,
+    price: 200,
     image: "/collection/royal-oak-bleu.png",
     finish: "Acier",
   },
   {
     slug: "royal-oak-vert",
-    name: 'SEIKO MOD Royal Oak | Vert',
+    name: "Royal Oak Vert",
     collection: "Intégrale",
     description:
       "Cadran vert kaki tapisserie, lunette octogonale vissée et bracelet intégré acier.",
-    price: 220,
+    price: 200,
     image: "/collection/royal-oak-vert.png",
     finish: "Acier",
   },
   {
     slug: "submariner-stealth-batman",
-    name: 'SEIKO MOD Submariner | Stealth Batman',
+    name: "Submariner Stealth Batman",
     collection: "Voyageur",
     description:
       "Boîtier et bracelet PVD noir, lunette bleu et noir. Une plongeuse discrète jusqu'au bout.",
@@ -338,7 +338,7 @@ export const watches: Watch[] = [
   },
   {
     slug: "submariner-stealth-joker",
-    name: 'SEIKO MOD Submariner | Stealth Joker',
+    name: "Submariner Stealth Joker",
     collection: "Voyageur",
     description:
       "Boîtier noirci et lunette violet et noir, index luminescents cerclés d'acier.",
@@ -348,47 +348,47 @@ export const watches: Watch[] = [
   },
   {
     slug: "seiko-mod-aquanaut-vert",
-    name: "seiko mod aquanaut vert",
+    name: "Aquanaut Vert",
     collection: "Voyageur",
     description:
       "Boîtier coussin acier, cadran vert texturé et bracelet caoutchouc assorti.",
-    price: 140,
+    price: 170,
     image: "/collection/seiko-mod-aquanaut-vert.png",
     finish: "Acier",
   },
   {
     slug: "seiko-mod-datejust-blanc-who-cares-im-already-late",
-    name: "seiko mod datejust blanc who cares im already late",
+    name: "Datejust Who Cares I'm Already Late",
     collection: "Signature",
     description:
       "Cadran blanc graphique, lunette cannelée et bracelet jubilé en acier.",
-    price: 190,
+    price: 180,
     image: "/collection/seiko-mod-datejust-blanc-who-cares-im-already-late.png",
     finish: "Acier",
   },
   {
     slug: "seiko-mod-datejust-bleu",
-    name: "seiko mod datejust bleu",
+    name: "Datejust Bleu",
     collection: "Signature",
     description:
       "Cadran bleu soleillé, lunette cannelée et bracelet jubilé cinq maillons.",
-    price: 190,
+    price: 180,
     image: "/collection/seiko-mod-datejust-bleu.png",
     finish: "Acier",
   },
   {
     slug: "seiko-mod-datejust-lady-or-rose-diamant",
-    name: "seiko mod datejust lady or rose diamant",
+    name: "Lady-Datejust Or Rose Diamant",
     collection: "Signature",
     description:
       "Boîtier bicolore acier et or rose, cadran nacré et index sertis.",
-    price: 190,
+    price: 180,
     image: "/collection/seiko-mod-datejust-lady-or-rose-diamant.png",
     finish: "Bicolore",
   },
   {
     slug: "seiko-mod-datejust-noir-galaxy-burst",
-    name: "seiko mod datejust noir galaxy burst",
+    name: "Datejust Galaxy Burst",
     collection: "Signature",
     description:
       "Cadran noir constellé, lunette cannelée et bracelet jubilé en acier.",
@@ -398,67 +398,67 @@ export const watches: Watch[] = [
   },
   {
     slug: "seiko-mod-datejust-noir-who-cares-im-already-late",
-    name: "seiko mod datejust noir who cares im already late",
+    name: "Datejust Who Cares I'm Already Late Noir",
     collection: "Signature",
     description:
       "Cadran noir graphique, lunette cannelée et bracelet jubilé en acier.",
-    price: 190,
+    price: 180,
     image: "/collection/seiko-mod-datejust-noir-who-cares-im-already-late.png",
     finish: "Acier",
   },
   {
     slug: "seiko-mod-datejust-olive",
-    name: "seiko mod datejust olive",
+    name: "Datejust Olive",
     collection: "Signature",
     description:
       "Cadran vert olive soleillé, lunette cannelée et bracelet jubilé acier.",
-    price: 190,
+    price: 180,
     image: "/collection/seiko-mod-datejust-olive.png",
     finish: "Acier",
   },
   {
     slug: "seiko-mod-datejust-or-argent",
-    name: "seiko mod datejust or argent",
+    name: "Datejust Bicolore",
     collection: "Signature",
     description:
       "Boîtier bicolore acier et or jaune, cadran champagne et bracelet jubilé.",
-    price: 190,
+    price: 180,
     image: "/collection/seiko-mod-datejust-or-argent.png",
     finish: "Bicolore",
   },
   {
     slug: "seiko-mod-datejust-or-rose-chocolat-diamant",
-    name: "seiko mod datejust or rose chocolat diamant",
+    name: "Datejust Chocolat Diamant",
     collection: "Signature",
     description:
       "Cadran chocolat soleillé, index sertis, boîtier et bracelet en or rose.",
-    price: 190,
+    price: 180,
     image: "/collection/seiko-mod-datejust-or-rose-chocolat-diamant.png",
     finish: "Or rose",
   },
   {
     slug: "seiko-mod-datejust-roman-bleu-ciel",
-    name: "seiko mod datejust roman bleu ciel",
+    name: "Datejust Roman Bleu Ciel",
     collection: "Signature",
     description:
       "Cadran bleu ciel soleillé, chiffres romains et bracelet jubilé acier.",
-    price: 190,
+    price: 180,
     image: "/collection/seiko-mod-datejust-roman-bleu-ciel.png",
     finish: "Acier",
   },
   {
     slug: "seiko-mod-datejust-vert-sunburst",
-    name: "seiko mod datejust vert sunburst",
+    name: "Datejust Vert",
     collection: "Signature",
     description:
       "Cadran vert sunburst, lunette cannelée et bracelet jubilé cinq maillons.",
-    price: 190,
+    price: 180,
     image: "/collection/seiko-mod-datejust-vert-sunburst.png",
     finish: "Acier",
   },
   {
     slug: "seiko-mod-day-date-bleu-nuit-galaxy-burst",
-    name: "seiko mod day date bleu nuit galaxy burst",
+    name: "Day-Date Galaxy Burst",
     collection: "Signature",
     description:
       "Cadran bleu nuit constellé, double guichet et bracelet président acier.",
@@ -468,27 +468,27 @@ export const watches: Watch[] = [
   },
   {
     slug: "seiko-mod-day-date-or-rose-smoke-dial",
-    name: "seiko mod day date or rose smoke dial",
+    name: "Day-Date Or Rose Smoke",
     collection: "Signature",
     description:
       "Boîtier et bracelet président or rose, cadran fumé et double guichet.",
-    price: 190,
+    price: 180,
     image: "/collection/seiko-mod-day-date-or-rose-smoke-dial.png",
     finish: "Or rose",
   },
   {
     slug: "seiko-mod-day-date-roman-or-blanc",
-    name: "seiko mod day date roman or blanc",
+    name: "Day-Date Or Jaune",
     collection: "Signature",
     description:
       "Boîtier or jaune, cadran blanc à chiffres romains et double guichet.",
-    price: 190,
+    price: 180,
     image: "/collection/seiko-mod-day-date-roman-or-blanc.png",
     finish: "Or rose",
   },
   {
     slug: "seiko-mod-nautilus-chocolat",
-    name: "seiko mod nautilus chocolat",
+    name: "Nautilus Or Rose Chocolat",
     collection: "Intégrale",
     description:
       "Boîtier coussin et bracelet intégré or rose, cadran chocolat strié.",
@@ -498,7 +498,7 @@ export const watches: Watch[] = [
   },
   {
     slug: "seiko-mod-nautilus-noir-open-heart",
-    name: "seiko mod nautilus noir open heart",
+    name: "Nautilus Open Heart",
     collection: "Intégrale",
     description:
       "Cadran noir strié avec ouverture mouvement, boîtier et bracelet acier.",
@@ -508,7 +508,7 @@ export const watches: Watch[] = [
   },
   {
     slug: "seiko-mod-nautilus-tiffany-bleu-open-heart",
-    name: "seiko mod nautilus tiffany bleu open heart",
+    name: "Nautilus Tiffany Open Heart",
     collection: "Intégrale",
     description:
       "Cadran bleu turquoise strié avec ouverture mouvement et bracelet acier.",
@@ -518,37 +518,37 @@ export const watches: Watch[] = [
   },
   {
     slug: "seiko-mod-royal-oak-triple-noir-chronographe",
-    name: "seiko mod royal oak triple noir chronographe",
+    name: "Royal Oak Chronographe Triple Noir",
     collection: "Intégrale",
     description:
       "Chronographe triple noir, cadran tapisserie et bracelet intégré assorti.",
-    price: 220,
+    price: 200,
     image: "/collection/seiko-mod-royal-oak-triple-noir-chronographe.png",
     finish: "Noir",
   },
   {
     slug: "seiko-mod-santos-9-5-blanc",
-    name: "seiko mod santos 9 5 blanc",
+    name: "Santos Fuck 9-5",
     collection: "Architecte",
     description:
       "Boîtier carré acier, cadran blanc à chiffres romains et détail rouge 9-5.",
-    price: 190,
+    price: 180,
     image: "/collection/seiko-mod-santos-9-5-blanc.png",
     finish: "Acier",
   },
   {
     slug: "seiko-mod-santos-triple-noir",
-    name: "seiko mod santos triple noir",
+    name: "Santos Triple Noir",
     collection: "Architecte",
     description:
       "Boîtier carré, cadran à chiffres romains et bracelet en finition noire.",
-    price: 190,
+    price: 180,
     image: "/collection/seiko-mod-santos-triple-noir.png",
     finish: "Noir",
   },
   {
     slug: "seiko-mod-submariner-noir",
-    name: "seiko mod submariner noir",
+    name: "Submariner Noir",
     collection: "Voyageur",
     description:
       "Plongeuse acier, cadran noir, lunette graduée et bracelet oyster.",

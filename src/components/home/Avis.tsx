@@ -29,7 +29,7 @@ const reviews = [
     quote:
       "Livrée dans les délais annoncés, écrin numéroté, réglage parfait dès la sortie de boîte.",
     author: "Julien M.",
-    model: "Royal Or Rose",
+    model: "Royal Oak Or Rose",
   },
 ];
 
