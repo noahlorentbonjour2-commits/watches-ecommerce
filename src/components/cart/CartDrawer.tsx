@@ -265,17 +265,29 @@ export default function CartDrawer() {
             {/* Cross-sell Étui de voyage si non présent */}
             {items.length > 0 && !hasEtui && (
               <div className="mt-5 rounded-xl border border-gold-500/30 bg-gold-500/5 p-3.5">
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold text-cream">
-                    Étui de voyage en cuir de luxe
-                  </span>
-                  <span className="text-[0.68rem] font-bold text-gold-400">
-                    Dès 19,99€
-                  </span>
+                <div className="flex items-center gap-3">
+                  <div className="relative size-14 shrink-0 overflow-hidden rounded-lg border border-white/15 bg-black shadow-sm">
+                    <Image
+                      src="/etuis/etui-1-noir.jpg"
+                      alt="Étui de voyage My Dial"
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-bold text-cream truncate">
+                        Étui en cuir de luxe
+                      </span>
+                      <span className="text-[0.68rem] font-bold text-gold-400">
+                        Dès 19,99€
+                      </span>
+                    </div>
+                    <p className="mt-0.5 text-[0.68rem] text-silver-400 line-clamp-1">
+                      Protection antichoc & coussinets velours doux.
+                    </p>
+                  </div>
                 </div>
-                <p className="mt-0.5 text-[0.68rem] text-silver-400">
-                  Protégez vos montres avec un écrin rigide en cuir grainé et velours suédé.
-                </p>
                 <div className="mt-3 grid grid-cols-3 gap-2">
                   {([1, 2, 3] as EtuiSlot[]).map((slot) => (
                     <button

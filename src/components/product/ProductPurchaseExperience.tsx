@@ -366,46 +366,92 @@ export default function ProductPurchaseExperience({
       </div>
 
       {/* ── 6.5 Vente Boîte & Étui à montres (Optionnel) ── */}
-      <div className="mt-6 rounded-xl border border-white/12 bg-navy-900/80 p-4 transition-all duration-200">
+      <div
+        className={`mt-6 overflow-hidden rounded-xl border-2 transition-all duration-200 ${
+          addEtui
+            ? "border-gold-500 bg-navy-900/95 shadow-lg shadow-gold-500/10"
+            : "border-white/12 bg-navy-900/70 hover:border-white/25"
+        }`}
+      >
+        {/* En-tête cliquable avec photo de l'étui DIRECTEMENT visible */}
         <div
           onClick={() => setAddEtui(!addEtui)}
-          className="flex cursor-pointer items-start justify-between gap-3"
+          className="flex cursor-pointer items-center justify-between gap-3.5 p-3.5 sm:p-4"
         >
-          <div className="flex items-start gap-3">
-            <div
-              className={`mt-0.5 flex size-5 shrink-0 items-center justify-center rounded border transition-colors ${
-                addEtui
-                  ? "border-gold-400 bg-gold-400 text-ink"
-                  : "border-white/20 bg-navy-950"
-              }`}
-            >
-              {addEtui && (
-                <svg className="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
-                  <polyline points="20 6 9 17 4 12" />
-                </svg>
-              )}
+          <div className="flex items-center gap-3.5 min-w-0">
+            {/* Photo de l'étui directement visible avant même de cliquer */}
+            <div className="relative size-16 sm:size-20 shrink-0 overflow-hidden rounded-lg border border-white/20 bg-black shadow-md">
+              <Image
+                src={getEtuiImage(selectedSlots, selectedColor)}
+                alt="Étui à montres My Dial"
+                fill
+                className="object-cover transition-transform duration-300 hover:scale-105"
+              />
+              <span className="absolute bottom-1 right-1 rounded bg-black/85 px-1 py-0.5 text-[0.62rem] font-bold text-gold-400">
+                {selectedSlots} {selectedSlots > 1 ? "montres" : "montre"}
+              </span>
             </div>
-            <div>
+
+            {/* Titre et détails */}
+            <div className="min-w-0">
               <div className="flex flex-wrap items-center gap-2">
                 <span className="text-sm font-bold text-cream">
-                  Ajouter un étui de voyage en cuir de luxe
+                  Étui de voyage en cuir de luxe
                 </span>
                 <span className="rounded bg-gold-500/15 border border-gold-500/30 px-2 py-0.5 text-[0.68rem] font-bold text-gold-400">
-                  Dès 19,99€
+                  {addEtui
+                    ? `${ETUI_PRICES[selectedSlots].toFixed(2).replace(".", ",")}€`
+                    : "Dès 19,99€"}
                 </span>
               </div>
-              <p className="mt-1 text-xs text-silver-400">
-                Protection rigide antichoc, fermeture boutons pression, intérieur velours doux et coussinets amovibles.
+              <p className="mt-1 text-xs text-silver-400 line-clamp-1 sm:line-clamp-2">
+                Protection rigide antichoc, velours suédé et coussinets amovibles.
               </p>
+              <span className="mt-1 inline-flex items-center gap-1 text-[0.7rem] font-semibold text-gold-400">
+                {addEtui
+                  ? "✓ Étui ajouté — Cliquez pour modifier la taille/couleur"
+                  : "+ Voir et ajouter à ma commande"}
+              </span>
             </div>
+          </div>
+
+          {/* Bouton Ajouter / Retirer */}
+          <div className="flex shrink-0 items-center">
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                setAddEtui(!addEtui);
+              }}
+              className={`flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-bold transition-all ${
+                addEtui
+                  ? "bg-gold-500 text-ink shadow-sm hover:bg-gold-400"
+                  : "border border-gold-500/60 bg-gold-500/10 text-gold-400 hover:bg-gold-500/20"
+              }`}
+            >
+              {addEtui ? (
+                <>
+                  <svg className="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                  <span>Ajouté</span>
+                </>
+              ) : (
+                <>
+                  <span className="text-base leading-none">+</span>
+                  <span>Ajouter</span>
+                </>
+              )}
+            </button>
           </div>
         </div>
 
+        {/* Détails et sélection personnalisée de l'étui */}
         {addEtui && (
-          <div className="mt-4 border-t border-white/10 pt-4 space-y-4">
-            {/* Aperçu Visuel Dynamique + Récap */}
-            <div className="flex items-center gap-4 rounded-lg border border-white/10 bg-navy-950 p-3">
-              <div className="relative size-20 shrink-0 overflow-hidden rounded-lg border border-white/15 bg-black">
+          <div className="border-t border-white/10 p-4 space-y-4 bg-navy-950/60">
+            {/* Grand aperçu visuel en direct */}
+            <div className="flex flex-col sm:flex-row items-center gap-4 rounded-xl border border-white/10 bg-navy-900/90 p-3.5">
+              <div className="relative h-44 w-full sm:h-28 sm:w-36 shrink-0 overflow-hidden rounded-lg border border-white/15 bg-black shadow-inner">
                 <Image
                   src={getEtuiImage(selectedSlots, selectedColor)}
                   alt="Étui de voyage My Dial"
@@ -413,25 +459,25 @@ export default function ProductPurchaseExperience({
                   className="object-cover"
                 />
               </div>
-              <div className="flex-1 min-w-0">
+              <div className="flex-1 w-full min-w-0">
                 <div className="flex items-baseline justify-between gap-2">
-                  <h4 className="text-sm font-bold text-cream truncate">
-                    Étui {selectedSlots} {selectedSlots > 1 ? "montres" : "montre"}
+                  <h4 className="text-sm font-bold text-cream">
+                    Étui {selectedSlots} {selectedSlots > 1 ? "montres" : "montre"} · {ETUI_COLOR_LABELS[selectedColor]}
                   </h4>
-                  <span className="text-base font-extrabold text-gold-400 shrink-0">
+                  <span className="text-lg font-black text-gold-400 shrink-0">
                     {ETUI_PRICES[selectedSlots].toFixed(2).replace(".", ",")}€
                   </span>
                 </div>
-                <p className="text-xs text-silver-400 mt-0.5">
-                  Coloris : <span className="font-semibold text-cream">{ETUI_COLOR_LABELS[selectedColor]}</span>
+                <p className="mt-1 text-xs text-silver-300 leading-relaxed">
+                  Confection en cuir haute qualité avec intérieur doublé en velours pour préserver vos cadrans des rayures et des chocs.
                 </p>
-                <div className="mt-1.5 flex items-center gap-2">
-                  <span className="inline-flex items-center gap-1 text-[0.68rem] font-medium text-emerald-400">
-                    <span>✓</span> Cuir grainé premium
+                <div className="mt-2 flex flex-wrap items-center gap-2 text-[0.7rem] text-emerald-400 font-medium">
+                  <span className="inline-flex items-center gap-1">
+                    <span>✓</span> Coussinets clipsables adaptés
                   </span>
                   <span className="text-silver-600">·</span>
-                  <span className="inline-flex items-center gap-1 text-[0.68rem] font-medium text-emerald-400">
-                    <span>✓</span> Coussinets clipsables
+                  <span className="inline-flex items-center gap-1">
+                    <span>✓</span> Fermeture pression renforcée
                   </span>
                 </div>
               </div>
@@ -452,7 +498,7 @@ export default function ProductPurchaseExperience({
                       onClick={() => setSelectedSlots(slot)}
                       className={`flex flex-col items-center justify-center rounded-lg border p-2.5 text-center transition-all ${
                         isSelected
-                          ? "border-gold-500 bg-gold-500/10 text-cream shadow-sm shadow-gold-500/10"
+                          ? "border-gold-500 bg-gold-500/15 text-cream shadow-sm shadow-gold-500/10"
                           : "border-white/10 bg-navy-950/70 text-silver-400 hover:border-white/20 hover:text-cream"
                       }`}
                     >
@@ -471,7 +517,7 @@ export default function ProductPurchaseExperience({
             {/* 2. Sélection Coloris */}
             <div>
               <span className="block text-[0.7rem] font-bold uppercase tracking-wider text-silver-400 mb-2">
-                2. Finition cuir
+                2. Finition du cuir
               </span>
               <div className="grid grid-cols-3 gap-2">
                 {(["noir", "marron", "bleu"] as EtuiColor[]).map((col) => {
@@ -490,7 +536,7 @@ export default function ProductPurchaseExperience({
                       onClick={() => setSelectedColor(col)}
                       className={`flex items-center gap-2 rounded-lg border p-2 text-left transition-all ${
                         isSelected
-                          ? "border-gold-500 bg-gold-500/10 text-cream shadow-sm shadow-gold-500/10"
+                          ? "border-gold-500 bg-gold-500/15 text-cream shadow-sm shadow-gold-500/10"
                           : "border-white/10 bg-navy-950/70 text-silver-400 hover:border-white/20 hover:text-cream"
                       }`}
                     >
