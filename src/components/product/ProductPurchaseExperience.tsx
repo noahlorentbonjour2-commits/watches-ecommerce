@@ -33,13 +33,9 @@ export default function ProductPurchaseExperience({
   const originalPrice1 = Math.round(price1 * 1.4) + 0.9;
   const economy1 = (originalPrice1 - price1).toFixed(2).replace(".", ",");
 
-  // Prix 2 montres : 15 % de réduction sur le total
+  // Prix 2 montres : 20 € de réduction sur la 2ème montre
   const totalBase2 = price1 + secondWatch.price;
-  const discount2 = Math.round(totalBase2 * 0.15);
-  const totalDuoPrice = totalBase2 - discount2;
-  const originalPrice2 = Math.round(totalBase2 * 1.45) + 0.8;
-  const economy2 = (originalPrice2 - totalDuoPrice).toFixed(2).replace(".", ",");
-  const unitDuoPrice = (totalDuoPrice / 2).toFixed(2).replace(".", ",");
+  const totalDuoPrice = totalBase2 - 20;
 
   // Ajout au panier
   const handleAddToCart = () => {
@@ -61,7 +57,7 @@ export default function ProductPurchaseExperience({
         price: totalDuoPrice,
         image: watch.image,
         quantity: 1,
-        details: `2 Montres incluses · Remise 15% · Étui 3 montres offert`,
+        details: `2 Montres incluses · -20€ sur la 2ème montre · Étui 3 montres offert`,
       });
     }
 
@@ -190,18 +186,17 @@ export default function ProductPurchaseExperience({
               {/* Libellé + Badge éco */}
               <div className="flex flex-wrap items-center gap-2">
                 <span className="font-bold text-cream">2 Montres</span>
-                <span className="rounded bg-white/10 px-2 py-0.5 text-[0.68rem] font-medium text-silver-300">
-                  Économisez {economy2}€
+                <span className="rounded bg-emerald-500/20 px-2 py-0.5 text-[0.68rem] font-bold text-emerald-300">
+                  -20€ sur la 2ème
                 </span>
               </div>
             </div>
 
             {/* Prix */}
             <div className="text-right">
-              <span className="text-lg font-bold text-cream">{unitDuoPrice}€</span>
-              <span className="block text-[0.68rem] text-gold-400 font-medium">/ unité</span>
+              <span className="text-lg font-bold text-cream">{totalDuoPrice}€</span>
               <span className="block text-xs text-silver-500 line-through">
-                {(originalPrice2 / 2).toFixed(2).replace(".", ",")}€
+                {totalBase2}€
               </span>
             </div>
           </div>
@@ -223,7 +218,7 @@ export default function ProductPurchaseExperience({
                   </div>
                   <span className="font-medium text-cream">{watch.name}</span>
                 </div>
-                <span className="text-silver-500 line-through">{watch.price}€</span>
+                <span className="font-semibold text-cream">{watch.price}€</span>
               </div>
 
               {/* Montre 2 */}
@@ -240,20 +235,26 @@ export default function ProductPurchaseExperience({
                   </div>
                   <div>
                     <span className="font-medium text-cream">{secondWatch.name}</span>
-                    <span className="block text-[0.65rem] text-gold-400">2ème montre incluse</span>
+                    <span className="block text-[0.65rem] text-emerald-400 font-semibold">-20€ sur ce modèle</span>
                   </div>
                 </div>
 
-                <button
-                  type="button"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setIsModalOpen(true);
-                  }}
-                  className="rounded bg-black border border-white/20 px-3 py-1 text-[0.7rem] font-bold text-cream transition-colors hover:border-gold-500 hover:text-gold-400"
-                >
-                  Changer
-                </button>
+                <div className="flex items-center gap-3">
+                  <div className="text-right">
+                    <span className="font-semibold text-emerald-400">{secondWatch.price - 20}€</span>
+                    <span className="block text-[0.65rem] text-silver-500 line-through">{secondWatch.price}€</span>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setIsModalOpen(true);
+                    }}
+                    className="rounded bg-black border border-white/20 px-3 py-1 text-[0.7rem] font-bold text-cream transition-colors hover:border-gold-500 hover:text-gold-400"
+                  >
+                    Changer
+                  </button>
+                </div>
               </div>
             </div>
           )}

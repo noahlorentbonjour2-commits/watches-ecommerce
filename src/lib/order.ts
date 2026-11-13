@@ -120,17 +120,21 @@ function fromBundle(slugs: string[]): Order {
   if (chosenWatches.length === 1) return fromModele(chosenWatches[0].slug);
 
   const totalBase = chosenWatches.reduce((acc, w) => acc + w.price, 0);
-  const remise = Math.round(totalBase * 0.15);
+  const remise = 20;
   const montant = totalBase - remise;
 
   return {
     titre: `Pack Duo My Dial (${chosenWatches.map((w) => w.name).join(" + ")})`,
     lignes: [
-      ...chosenWatches.map((w, index) => ({
-        libelle: `Montre ${index + 1}`,
-        valeur: `${w.name} (${w.price} €)`,
-      })),
-      { libelle: "Remise Pack Duo (15%)", valeur: `-${remise} €` },
+      {
+        libelle: "1ère montre",
+        valeur: `${chosenWatches[0].name} (${chosenWatches[0].price} €)`,
+      },
+      {
+        libelle: "2ème montre (-20 € inclus)",
+        valeur: `${chosenWatches[1].name} (${chosenWatches[1].price - 20} €)`,
+      },
+      { libelle: "Remise 2ème montre", valeur: "-20 €" },
       { libelle: "Cadeau exclusif inclus", valeur: "Étui 3 montres en cuir de voyage (Offert)" },
       { libelle: "Accessoire inclus", valeur: "Chasse-goupille de réglage bracelet (Offert)" },
       { libelle: "Livraison", valeur: "Livraison suivie & assurée à domicile (Offerte)" },
@@ -182,11 +186,11 @@ function fromCart(cartItems: any[]): Order {
 
       if (pair.length === 2) {
         const base = pair[0].price + pair[1].price;
-        const discount = Math.round(base * 0.15);
+        const discount = 20;
         const duoPrice = base - discount;
         items.push({
           name: `Pack Duo (${pair[0].name} + ${pair[1].name})`,
-          description: "Offre Duo avec remise 15% et étui 3 montres offert",
+          description: "Offre Duo avec -20€ sur la 2ème montre et étui 3 montres offert",
           unitAmount: duoPrice,
           quantity: qty,
           image: pair[0].image,
