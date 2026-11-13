@@ -9,6 +9,7 @@ import {
   type PartCategoryId,
 } from "./parts";
 import { watches } from "./watches";
+import { getEtuiProduct, type EtuiSlot, type EtuiColor } from "./etuis";
 
 /**
  * Une commande, telle que le serveur la reconstruit.
@@ -42,6 +43,7 @@ export type CheckoutRequest =
   | { type: "configuration"; config: Partial<Configuration> }
   | { type: "modele"; slug: string }
   | { type: "bundle"; slugs: string[] }
+  | { type: "etui"; slots: EtuiSlot; color: EtuiColor }
   | { type: "cart"; items: any[] };
 
 /** Valide une configuration reçue du client, option par option. */
@@ -223,12 +225,31 @@ function fromCart(cartItems: any[]): Order {
       } catch {
         // Ignorer config corrompue
       }
+    } else if (it.type === "etui") {
+      const slots = (Number(it.slots) || 1) as EtuiSlot;
+      const color = (it.color || "noir") as EtuiColor;
+      const etui = getEtuiProduct(slots, color);
+      items.push({
+        name: etui.title,
+        description: etui.description,
+        unitAmount: etui.price,
+        quantity: qty,
+        image: etui.image,
+      });
+      lignes.push({
+        libelle: `${qty}x ${etui.title}`,
+        valeur: `${(etui.price * qty).toFixed(2).replace(".", ",")} €`,
+      });
+      totalMontant += etui.price * qty;
     }
   }
 
   if (items.length === 0) {
     throw new Error("Aucun article valide dans le panier");
   }
+
+  // Arrondi au centime près
+  totalMontant = Math.round(totalMontant * 100) / 100;
 
   // Ajout des cadeaux
   lignes.push({ libelle: "Accessoire offert", valeur: "Chasse-goupille de réglage bracelet" });
@@ -250,11 +271,40 @@ function fromCart(cartItems: any[]): Order {
   };
 }
 
+function fromEtui(slots: EtuiSlot, color: EtuiColor): Order {
+  const etui = getEtuiProduct(slots, color);
+  return {
+    titre: etui.title,
+    lignes: [
+      { libelle: "Emplacement(s)", valeur: etui.slotsLabel },
+      { libelle: "Coloris cuir", valeur: etui.colorLabel },
+      { libelle: "Livraison", valeur: "Livraison suivie à domicile (Offerte)" },
+    ],
+    montant: etui.price,
+    image: etui.image,
+    metadata: {
+      type: "etui",
+      slots: String(slots),
+      color,
+    },
+    items: [
+      {
+        name: etui.title,
+        description: etui.description,
+        unitAmount: etui.price,
+        quantity: 1,
+        image: etui.image,
+      },
+    ],
+  };
+}
+
 export function buildOrder(payload: CheckoutRequest): Order {
   if (payload.type === "modele") return fromModele(payload.slug);
   if (payload.type === "bundle") return fromBundle(payload.slugs);
   if (payload.type === "configuration")
     return fromConfiguration(payload.config ?? {});
+  if (payload.type === "etui") return fromEtui(payload.slots, payload.color);
   if (payload.type === "cart") return fromCart(payload.items ?? []);
   throw new Error("Type de commande inconnu");
 }

@@ -5,7 +5,7 @@ import type { Configuration } from "@/lib/parts";
 
 export type CartItem = {
   id: string;
-  type: "modele" | "bundle" | "configuration";
+  type: "modele" | "bundle" | "configuration" | "etui";
   title: string;
   price: number;
   image: string;
@@ -14,6 +14,8 @@ export type CartItem = {
   slug?: string;
   slugs?: [string, string];
   config?: Configuration;
+  slots?: 1 | 2 | 3;
+  color?: "noir" | "marron" | "bleu";
 };
 
 type CartContextType = {
@@ -73,6 +75,8 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
           ? `modele-${newItem.slug}`
           : newItem.type === "bundle"
           ? `bundle-${newItem.slugs?.join("-")}`
+          : newItem.type === "etui"
+          ? `etui-${newItem.slots || 1}-${newItem.color || "noir"}`
           : `custom-${Date.now()}`);
 
       const existingIndex = currentItems.findIndex((it) => it.id === generatedId);

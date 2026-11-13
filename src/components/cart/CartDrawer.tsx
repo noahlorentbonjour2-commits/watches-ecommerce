@@ -4,12 +4,18 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "@/context/CartContext";
+import {
+  getEtuiProduct,
+  ETUI_PRICES,
+  type EtuiSlot,
+} from "@/lib/etuis";
 
 const formatPrice = (price: number) =>
   new Intl.NumberFormat("fr-FR", {
     style: "currency",
     currency: "EUR",
-    maximumFractionDigits: 0,
+    minimumFractionDigits: price % 1 === 0 ? 0 : 2,
+    maximumFractionDigits: 2,
   }).format(price);
 
 export default function CartDrawer() {
@@ -17,6 +23,7 @@ export default function CartDrawer() {
     items,
     isOpen,
     closeCart,
+    addItem,
     removeItem,
     updateQuantity,
     totalCount,
@@ -25,6 +32,8 @@ export default function CartDrawer() {
 
   const [enCours, setEnCours] = useState(false);
   const [erreur, setErreur] = useState<string | null>(null);
+
+  const hasEtui = items.some((it) => it.type === "etui");
 
   // Nombre total de montres réelles (un pack duo compte pour 2)
   const totalWatches = items.reduce((acc, it) => {
@@ -251,6 +260,52 @@ export default function CartDrawer() {
                   </li>
                 ))}
               </ul>
+            )}
+
+            {/* Cross-sell Étui de voyage si non présent */}
+            {items.length > 0 && !hasEtui && (
+              <div className="mt-5 rounded-xl border border-gold-500/30 bg-gold-500/5 p-3.5">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-bold text-cream">
+                    Étui de voyage en cuir de luxe
+                  </span>
+                  <span className="text-[0.68rem] font-bold text-gold-400">
+                    Dès 19,99€
+                  </span>
+                </div>
+                <p className="mt-0.5 text-[0.68rem] text-silver-400">
+                  Protégez vos montres avec un écrin rigide en cuir grainé et velours suédé.
+                </p>
+                <div className="mt-3 grid grid-cols-3 gap-2">
+                  {([1, 2, 3] as EtuiSlot[]).map((slot) => (
+                    <button
+                      key={slot}
+                      type="button"
+                      onClick={() => {
+                        const etui = getEtuiProduct(slot, "noir");
+                        addItem({
+                          type: "etui",
+                          title: etui.title,
+                          price: etui.price,
+                          image: etui.image,
+                          quantity: 1,
+                          details: `${etui.slotsLabel} · Noir Carbone`,
+                          slots: slot,
+                          color: "noir",
+                        });
+                      }}
+                      className="flex flex-col items-center justify-center rounded-lg border border-white/10 bg-navy-950/80 p-2 text-center transition-all hover:border-gold-500 hover:bg-gold-500/10"
+                    >
+                      <span className="text-[0.68rem] font-bold text-cream">
+                        {slot} {slot > 1 ? "montres" : "montre"}
+                      </span>
+                      <span className="text-[0.68rem] font-extrabold text-gold-400">
+                        +{ETUI_PRICES[slot].toFixed(2).replace(".", ",")}€
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              </div>
             )}
           </div>
 
