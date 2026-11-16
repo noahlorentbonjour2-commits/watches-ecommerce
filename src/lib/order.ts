@@ -266,6 +266,10 @@ function fromCart(cartItems: any[]): Order {
       type: "cart",
       items_count: String(items.length),
       watches_count: String(totalWatchesCount),
+      articles_resume: lignes.map((l) => `${l.libelle}: ${l.valeur}`).join(" | ").slice(0, 500),
+      ...Object.fromEntries(
+        lignes.slice(0, 20).map((l, idx) => [`article_${idx + 1}`, `${l.libelle} (${l.valeur})`.slice(0, 500)])
+      ),
     },
     items,
   };

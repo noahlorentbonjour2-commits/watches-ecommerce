@@ -1,76 +1,13 @@
 import type Stripe from "stripe";
-import { escapeHtml, sendMail } from "@/lib/mail";
+import { notifyOrder } from "@/lib/orderNotification";
 import { getStripe } from "@/lib/stripe";
-
-const euro = (centimes: number) =>
-  new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR" }).format(
-    centimes / 100,
-  );
-
-function corpsHtml(session: Stripe.Checkout.Session) {
-  const client = session.customer_details;
-  const livraison = session.collected_information?.shipping_details?.address;
-
-  const composants = Object.entries(session.metadata ?? {})
-    .filter(([cle]) => cle !== "type")
-    .map(
-      ([cle, valeur]) =>
-        `<tr><td style="padding:6px 16px 6px 0;color:#667">${escapeHtml(cle)}</td><td style="padding:6px 0"><strong>${escapeHtml(valeur)}</strong></td></tr>`,
-    )
-    .join("");
-
-  const adresse = livraison
-    ? [
-        livraison.line1,
-        livraison.line2,
-        `${livraison.postal_code ?? ""} ${livraison.city ?? ""}`.trim(),
-        livraison.country,
-      ]
-        .filter((ligne): ligne is string => Boolean(ligne))
-        .map(escapeHtml)
-        .join("<br>")
-    : "—";
-
-  return `
-    <div style="font-family:system-ui,sans-serif;max-width:560px;color:#111">
-      <h2 style="margin:0 0 4px">Nouvelle commande My Dial</h2>
-      <p style="margin:0 0 20px;font-size:22px"><strong>${euro(session.amount_total ?? 0)}</strong></p>
-
-      <h3 style="margin:0 0 8px;font-size:14px;text-transform:uppercase;letter-spacing:.08em;color:#667">Détail</h3>
-      <table style="border-collapse:collapse;margin-bottom:20px">${composants}</table>
-
-      <h3 style="margin:0 0 8px;font-size:14px;text-transform:uppercase;letter-spacing:.08em;color:#667">Client</h3>
-      <p style="margin:0 0 20px;line-height:1.6">
-        ${escapeHtml(client?.name ?? "—")}<br>
-        ${escapeHtml(client?.email ?? "—")}<br>
-        ${escapeHtml(client?.phone ?? "—")}
-      </p>
-
-      <h3 style="margin:0 0 8px;font-size:14px;text-transform:uppercase;letter-spacing:.08em;color:#667">Livraison</h3>
-      <p style="margin:0 0 20px;line-height:1.6">${adresse}</p>
-
-      <p style="margin:0;font-size:12px;color:#889">Session Stripe : ${escapeHtml(session.id)}</p>
-    </div>`;
-}
-
-async function notifier(session: Stripe.Checkout.Session) {
-  // Sans service d'e-mail, Stripe reste la source de vérité : la commande est
-  // visible au tableau de bord avec ses métadonnées. On ne fait donc pas
-  // échouer le webhook.
-  const { ok, raison } = await sendMail({
-    subject: `Commande ${euro(session.amount_total ?? 0)} — ${session.customer_details?.name ?? "client"}`,
-    replyTo: session.customer_details?.email ?? undefined,
-    html: corpsHtml(session),
-  });
-
-  if (!ok) console.warn("Notification de commande non envoyée :", raison);
-}
 
 export async function POST(request: Request) {
   const secret = process.env.STRIPE_WEBHOOK_SECRET;
   const signature = request.headers.get("stripe-signature");
 
   if (!secret || !signature) {
+    console.warn("Webhook Stripe reçu mais non configuré (secret ou signature manquant)");
     return new Response("Webhook non configuré", { status: 400 });
   }
 
@@ -92,11 +29,9 @@ export async function POST(request: Request) {
     // Avec les moyens de paiement différés, une session peut être terminée
     // avant que Stripe ait encaissé le paiement. L'événement asynchrone
     // ci-dessus prendra alors le relais une fois l'encaissement confirmé.
-    if (session.payment_status !== "paid") return Response.json({ received: true });
-
-    // On relit la session pour disposer des coordonnées complètes.
-    const complete = await getStripe().checkout.sessions.retrieve(session.id);
-    await notifier(complete);
+    if (session.payment_status === "paid") {
+      await notifyOrder(session.id);
+    }
   }
 
   return Response.json({ received: true });

@@ -83,10 +83,10 @@ export default function CartDrawer() {
       />
 
       {/* ── PANNEAU DU PANIER LATÉRAL ── */}
-      <div className="fixed inset-y-0 right-0 flex max-w-full pl-10">
-        <div className="flex w-screen max-w-md flex-col border-l border-white/10 bg-navy-950 text-cream shadow-2xl">
+      <div className="fixed inset-y-0 right-0 flex max-w-full pl-0 sm:pl-10">
+        <div className="flex w-screen max-w-full sm:max-w-md flex-col border-l border-white/10 bg-navy-950 text-cream shadow-2xl">
           {/* En-tête */}
-          <div className="flex items-center justify-between border-b border-white/10 px-6 py-5">
+          <div className="flex items-center justify-between border-b border-white/10 px-4 py-4 sm:px-6 sm:py-5">
             <div className="flex items-center gap-2.5">
               <svg
                 className="size-5 text-gold-400"
@@ -145,7 +145,7 @@ export default function CartDrawer() {
           </div>
 
           {/* Liste des articles */}
-          <div className="flex-1 overflow-y-auto p-6">
+          <div className="flex-1 overflow-y-auto p-4 sm:p-6">
             {items.length === 0 ? (
               <div className="flex h-full flex-col items-center justify-center text-center">
                 <div className="flex size-16 items-center justify-center rounded-full bg-white/5 text-silver-500">
@@ -323,7 +323,7 @@ export default function CartDrawer() {
 
           {/* Pied de page du panier (si non vide) */}
           {items.length > 0 && (
-            <div className="border-t border-white/10 bg-navy-900/80 p-6">
+            <div className="border-t border-white/10 bg-navy-900/90 p-4 sm:p-6 pb-6 sm:pb-8">
               <div className="space-y-2 text-xs">
                 <div className="flex justify-between text-silver-300">
                   <span>Sous-total</span>
